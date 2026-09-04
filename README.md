@@ -16,14 +16,22 @@ itinerary with route overview, day navigation, booking status, and map links.
 The only external requests are Google Fonts; everything else runs locally in the
 browser, so the page still works fine without a network connection (with fallback fonts).
 
-## Enabling GitHub Pages (one-time, in the browser)
+## Enabling GitHub Pages — one manual step
 
-The workflow is ready, but Pages has to be switched on for the repository once:
+Everything is committed and the deploy workflow is in place, but **Pages itself has to
+be switched on once from the browser.** A workflow cannot do this for you: the
+`GITHUB_TOKEN` it runs with is not allowed to create a Pages site
+(`Resource not accessible by integration`), so the first two runs fail until you do this:
 
 1. Open **Settings → Pages** in this repository.
-2. Under **Build and deployment → Source**, choose **GitHub Actions**.
-3. Re-run the **Deploy to GitHub Pages** workflow from the **Actions** tab
-   (or push any commit) — the site publishes at the URL above.
+2. Under **Build and deployment → Source**, pick **GitHub Actions**.
+3. Go to the **Actions** tab → **Deploy to GitHub Pages** → **Re-run all jobs**
+   (or just push any commit).
+
+The site then publishes at the URL above, and every later push redeploys it automatically.
+
+If the repository is private, note that Pages on private repos requires a paid plan —
+making the repository public is the free route.
 
 ## Editing the itinerary
 

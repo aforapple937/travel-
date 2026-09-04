@@ -25,11 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Requires Settings -> Pages -> Source = "GitHub Actions" (one-time)
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          # Turn Pages on automatically if it isn't already enabled
-          enablement: true
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3

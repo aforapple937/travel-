@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Europe · 欧洲之旅 · September 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #FAF8F3;
+    --ink: #1C2431;
+    --wine: #6E2A3A;
+    --wine-soft: #F3E7EA;
+    --graphite: #6F7681;
+    --hairline: #E3DED4;
+    --booked: #2F5F4F;
+    --booked-soft: #E6EFEB;
+    --pending: #8A6A1F;
+    --pending-soft: #F4EDDD;
+    --measure: 640px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.zh { font-family: 'Inter', 'Noto Serif SC', -apple-system, 'PingFang SC', 'Hiragino Sans GB', sans-serif; }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+  body.zh .serif { font-family: 'Noto Serif SC', 'Cormorant Garamond', Georgia, serif; }
+
+  .page { max-width: var(--measure); margin: 0 auto; padding: 0 22px 80px; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0 10px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .topbar .title { font-size: 14px; color: var(--graphite); }
+  .lang {
+    display: inline-flex; border: 1px solid var(--hairline); border-radius: 999px; overflow: hidden;
+  }
+  .lang button {
+    background: transparent; border: 0; padding: 6px 12px;
+    font: inherit; font-size: 13px; color: var(--graphite); cursor: pointer;
+  }
+  .lang button.on { background: var(--ink); color: var(--paper); }
+  .lang button:focus-visible { outline: 2px solid var(--wine); outline-offset: -2px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 40px 0 28px; }
+  .hero h1 { font-weight: 300; font-size: clamp(56px, 13vw, 92px); line-height: 0.95; letter-spacing: -0.01em; }
+  body.zh .hero h1 { font-weight: 300; font-size: clamp(44px, 11vw, 72px); letter-spacing: 0.02em; }
+  .hero .sub { margin-top: 14px; font-style: italic; font-size: 21px; color: var(--graphite); }
+  body.zh .hero .sub { font-style: normal; font-size: 17px; }
+  .hero .names { margin-top: 4px; font-size: 13px; color: var(--graphite); }
+
+  /* ---------- Route ---------- */
+  .route {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    margin: 32px 0 30px; position: relative;
+  }
+  .route::before {
+    content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 6px; height: 1px; background: var(--hairline);
+  }
+  .route button {
+    background: transparent; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .route .dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--paper); position: relative; z-index: 1; }
+  .route .city { font-size: 20px; line-height: 1; }
+  body.zh .route .city { font-size: 17px; }
+  .route .when { font-size: 11px; color: var(--graphite); }
+  .route button.on .dot { background: var(--wine); border-color: var(--wine); }
+  .route button:focus-visible { outline: 2px solid var(--wine); outline-offset: 4px; border-radius: 4px; }
+
+  /* ---------- Date strip ---------- */
+  .strip {
+    display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 12px;
+    scrollbar-width: none; -ms-overflow-style: none;
+    scroll-snap-type: x proximity;
+  }
+  .strip::-webkit-scrollbar { display: none; }
+  .strip button {
+    flex: 0 0 auto; min-width: 58px; padding: 10px 8px;
+    background: transparent; border: 1px solid var(--hairline); border-radius: 12px;
+    font: inherit; color: var(--ink); cursor: pointer; text-align: center; scroll-snap-align: center;
+  }
+  .strip button .dow { display: block; font-size: 11px; color: var(--graphite); }
+  .strip button .num { display: block; font-size: 20px; line-height: 1.15; margin-top: 2px; }
+  .strip button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .strip button.on .dow { color: color-mix(in srgb, var(--paper) 70%, transparent); }
+  .strip button.today:not(.on) { border-color: var(--wine); }
+  .strip button:focus-visible { outline: 2px solid var(--wine); outline-offset: 2px; }
+
+  /* ---------- Day ---------- */
+  .day-head { margin: 22px 0 6px; }
+  .day-head h2 { font-weight: 400; font-size: 34px; line-height: 1.05; }
+  body.zh .day-head h2 { font-size: 28px; }
+  .day-head .where { margin-top: 6px; font-size: 13.5px; color: var(--graphite); }
+  .day-head .where a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  .day-head .where a:hover { border-bottom-color: var(--graphite); }
+
+  .events { list-style: none; margin-top: 16px; border-top: 1px solid var(--hairline); }
+  .ev {
+    display: grid; grid-template-columns: 62px 1fr; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid var(--hairline); align-items: start;
+  }
+  .ev .time { font-size: 13px; color: var(--graphite); line-height: 1.5; padding-top: 2px; }
+  .ev .time .end { display: block; font-size: 11.5px; color: color-mix(in srgb, var(--graphite) 70%, transparent); }
+  .ev .name { font-size: 16px; font-weight: 500; line-height: 1.35; }
+  .ev.travel .name { color: var(--wine); }
+  .ev.ticket {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--pending) 8%, transparent), transparent 40%);
+    border-left: 2px solid var(--pending);
+    padding-left: 12px;
+    margin-left: -14px;
+  }
+  .ev .note { margin-top: 4px; font-size: 14px; color: #3E4652; line-height: 1.55; }
+  .ev .meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .maplink {
+    font-size: 12.5px; color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--hairline); padding-bottom: 1px;
+  }
+  .maplink:hover { border-bottom-color: var(--ink); }
+  .maplink:focus-visible { outline: 2px solid var(--wine); outline-offset: 2px; }
+
+  .hop {
+    display: grid; grid-template-columns: 62px 1fr; gap: 14px;
+    padding: 6px 0; font-size: 12px; color: var(--graphite); font-style: italic;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .hop::before { content: ""; display: block; justify-self: center; width: 1px; height: 18px; background: var(--hairline); }
+  body.zh .hop { font-style: normal; }
+
+  .nav { display: flex; justify-content: space-between; margin-top: 26px; }
+  .nav button {
+    background: transparent; border: 1px solid var(--hairline); border-radius: 999px;
+    padding: 9px 16px; font: inherit; font-size: 13.5px; color: var(--ink); cursor: pointer;
+  }
+  .nav button:disabled { opacity: .35; cursor: default; }
+  .nav button:focus-visible { outline: 2px solid var(--wine); outline-offset: 2px; }
+
+  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hairline); font-size: 12.5px; color: var(--graphite); line-height: 1.8; }
+  footer span { display: block; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .day-view { animation: fade .28s ease-out both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px);} to { opacity: 1; transform: none; } }
+  }
+
+  /* ---------- Note pills / buttons ---------- */
+  .ev .meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .actionbtn {
+    font-size: 12.5px; color: var(--ink); background: transparent;
+    border: 1px solid var(--hairline); border-radius: 999px; padding: 4px 12px;
+    cursor: pointer; font-family: inherit; text-decoration: none; line-height: 1.5;
+  }
+  .actionbtn:hover { border-color: var(--ink); }
+  .actionbtn:focus-visible { outline: 2px solid var(--wine); outline-offset: 2px; }
+  .actionbtn.tip { color: var(--wine); border-color: color-mix(in srgb, var(--wine) 35%, var(--hairline)); }
+
+  /* ---------- Bottom-sheet modal ---------- */
+  .sheet-backdrop {
+    position: fixed; inset: 0; background: rgba(28,36,49,0.4);
+    opacity: 0; pointer-events: none; transition: opacity .2s ease; z-index: 50;
+  }
+  .sheet-backdrop.open { opacity: 1; pointer-events: auto; }
+  .sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 51;
+    background: var(--paper); border-radius: 18px 18px 0 0;
+    max-width: var(--measure); margin: 0 auto;
+    padding: 20px 24px calc(28px + env(safe-area-inset-bottom));
+    max-height: 75vh; overflow-y: auto;
+    transform: translateY(100%); transition: transform .28s cubic-bezier(.32,.72,0,1);
+    box-shadow: 0 -8px 30px rgba(28,36,49,0.15);
+  }
+  .sheet.open { transform: translateY(0); }
+  .sheet .handle {
+    width: 36px; height: 4px; border-radius: 999px; background: var(--hairline);
+    margin: 0 auto 16px;
+  }
+  .sheet h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 24px; margin-bottom: 12px; }
+  body.zh .sheet h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; }
+  .sheet .body { font-size: 14.5px; line-height: 1.75; color: #2E3641; white-space: pre-line; }
+  .sheet .close {
+    position: absolute; top: 16px; right: 20px; background: transparent; border: 0;
+    font-size: 20px; color: var(--graphite); cursor: pointer; line-height: 1; padding: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <span class="title" data-en="Trip companion" data-zh="旅行手册"></span>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="zh">中文</button>
+    </div>
+  </div>
+
+  <nav class="route" id="route" aria-label="Cities"></nav>
+
+  <div class="strip" id="strip" role="tablist" aria-label="Days"></div>
+
+  <section class="day-view" id="dayView"></section>
+
+  <div class="nav">
+    <button type="button" id="prev" data-en="← Previous day" data-zh="← 前一天"></button>
+    <button type="button" id="next" data-en="Next day →" data-zh="后一天 →"></button>
+  </div>
+
+</div>
+
+
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true">
+  <button type="button" class="close" id="sheetClose" aria-label="Close">✕</button>
+  <div class="handle"></div>
+  <h3 id="sheetTitle"></h3>
+  <div class="body" id="sheetBody"></div>
+</div>
+<script>
+// ---------------- DATA ----------------
+const CITIES = {
+  paris:   { en:'Paris',       zh:'巴黎',      when_en:'6 – 10 Sep', when_zh:'9/6 – 9/10', hotel:'Hôtel Marignan Champs-Élysées', hotelq:'Hôtel Marignan Champs-Élysées, 12 Rue de Marignan, 75008 Paris' },
+  grind:   { en:'Grindelwald', zh:'格林德瓦',  when_en:'10 – 13 Sep', when_zh:'9/10 – 9/13', hotel:'Hotel Belvedere', hotelq:'Hotel Belvedere, Dorfstrasse 53, 3818 Grindelwald' },
+  florence:{ en:'Florence',    zh:'佛罗伦萨',  when_en:'13 – 17 Sep', when_zh:'9/13 – 9/17', hotel:'Hotel La Gemma', hotelq:'Hotel La Gemma, Via dei Cavalieri 2, 50122 Firenze' },
+  rome:    { en:'Rome',        zh:'罗马',      when_en:'17 – 20 Sep', when_zh:'9/17 – 9/20', hotel:'NH Collection Roma Palazzo Cinquecento', hotelq:'NH Collection Roma Palazzo Cinquecento, Piazza dei Cinquecento 90, 00185 Roma' },
+};
+
+// status: booked | pending | free | (none for meals/breakfast)
+const DAYS = [
+ { d:'2026-09-06', back_en:'Car, ~50 min to hotel (after immigration and bag collection).', back_zh:'打车约 50 分钟到酒店（含过关和取行李时间）。', city:'paris', en:'Flying out', zh:'出发', ev:[
+   { ticket:true, t:'13:35', e:'21:15', travel:true, en:'Singapore → Paris', zh:'新加坡 → 巴黎', ne:'SQ338', nz:'新航 SQ338', tip_en:'At passport control, use the Accès N°1 lane — keep your boarding pass ready.', tip_zh:'过边检时走 Accès N°1 通道——保留登机牌备查。', q:'Charles de Gaulle Airport' },
+ ]},
+ { d:'2026-09-07', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'paris', en:'Museums and the islands', zh:'博物馆与河心岛', ev:[
+   { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
+   { ticket:true, tr_en:'Car, 18 min', tr_zh:'打车 18 分钟', t:'09:00', e:'12:00', en:'Louvre', zh:'卢浮宫', ne:'The world\'s largest museum, in a former royal palace on the Seine. The headline works are the Mona Lisa, the Venus de Milo, and the Winged Victory of Samothrace at the top of the grand staircase, alongside thousands of European paintings and antiquities across three wings.', nz:'塞纳河畔一座前王宫，如今是世界最大的博物馆。代表作是蒙娜丽莎、断臂维纳斯，以及大阶梯顶端的胜利女神像，三大展馆还藏有数千件欧洲绘画与古物。',
+     tip_en:'Don\'t forget to bring the Winged Victory perler beads!\n\nTimed 09:00 — arrive by 08:45.\n\nMultiple entrances: use Carrousel du Louvre (99 Rue de Rivoli), not the Pyramid — the queue is shorter. Look for large red \'Carrousel du Louvre\' signs and stairs/escalators down from street level; it\'s a discreet doorway, easy to walk past. Head down and follow the shops until you see the glass inverted pyramid — the security hall for timed tickets is right there.\n\nIf the car can\'t stop on Rue de Rivoli, the drop-off is at Place du Carrousel, between the Pyramid and the small triumphal arch — stairs on either side of the arch (behind a low wall) lead down into the same underground complex.\n\nRoute worth planning: Denon wing first — Winged Victory → Mona Lisa (Room 711) → Grande Galerie → Room 700 — then cross to Sully for Venus de Milo. No re-entry once you leave.',
+     tip_zh:'别忘了带胜利女神拼豆！\n\n09:00 定时入场——08:45 前到。\n\n有多个入口：走 Rue de Rivoli 99 号的 Carrousel du Louvre 入口，不要走金字塔入口，排队较短。留意大幅红色\'Carrousel du Louvre\'标志和从地面往下的楼梯/扶梯——入口比较低调，容易走过头。下楼后沿着商店走，看到玻璃倒金字塔就到了——定时票的安检大厅就在那里。\n\n如果车没办法停在 Rue de Rivoli，下车点在 Place du Carrousel（金字塔和小凯旋门之间）——小凯旋门两侧（矮墙后方）也有楼梯通往同一个地下建筑群。\n\n建议路线：先走德农馆——胜利女神→蒙娜丽莎（711 室）→大画廊→700 室——再转到叙利馆看维纳斯。一旦离开不能再进。',
+     q:'Carrousel du Louvre, 99 Rue de Rivoli, 75001 Paris' },
+   { tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'12:00', e:'13:00', en:'Tuileries Garden', zh:'杜乐丽花园', ne:'A formal 16th-century garden running from the Louvre to Place de la Concorde — gravel avenues, clipped trees, and two round ponds ringed with green chairs.', nz:'从卢浮宫延伸到协和广场的十六世纪法式花园——碎石大道、修剪整齐的树，两个圆池边围着绿椅子。', q:'Tuileries Garden' },
+   { ticket:true, tr_en:'Car, 15 min', tr_zh:'打车 15 分钟', t:'13:30', e:'14:30', en:'Lunch at Ostra', zh:'午餐 · Ostra', ne:'A seafood restaurant near Notre-Dame. Known for oysters and shellfish platters.', nz:'圣母院附近的海鲜餐厅，以生蚝和海鲜拼盘闻名。', q:'Ostra, 17 Rue du Petit Pont, 75005 Paris' },
+   { ticket:true, tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'15:00', e:'16:00', en:'Sainte-Chapelle', zh:'圣礼拜堂', ne:'A small 13th-century royal chapel whose upper level is almost entirely stained glass — fifteen windows fifteen metres tall, depicting over a thousand biblical scenes.',
+     nz:'十三世纪的小型皇家礼拜堂，楼上几乎全是彩绘玻璃——十五扇十五米高的窗，描绘超过一千个圣经场景。',
+     tip_en:'Timed 15:00 — arrive by 14:30.',
+     tip_zh:'15:00 定时入场——14:30 前到。',
+     q:'Sainte-Chapelle' },
+   { tr_en:'Walk 4 min', tr_zh:'步行 4 分钟', t:'16:15', e:'17:15', en:'Notre-Dame', zh:'巴黎圣母院', ne:'Paris\'s Gothic cathedral, reopened in 2024 after the fire and a five-year restoration — the stone paler and brighter than before, with three rose windows and flying buttresses around the apse.', nz:'巴黎的哥特式大教堂，2019 年火灾后经五年修复于 2024 年重新开放——石头比以前更浅更亮，有三扇玫瑰窗和后殿的飞扶壁。',
+     tip_en:'Free, but reserve a timed slot ~2 days ahead once you\'re in Paris — the standby queue is long without one.',
+     tip_zh:'免费，但到巴黎后需提前约 2 天预约时段——没有预约的话排队会很长。',
+     q:'Cathédrale Notre-Dame de Paris' },
+   { tr_en:'Walk 17 min', tr_zh:'步行 17 分钟', t:'17:30', e:'20:00', en:'Le Marais and grab light dinner', zh:'玛黑区，顺便吃简餐', ne:'A 17th-century aristocratic quarter turned Paris\'s most fashionable district. Independent fashion boutiques and concept stores line Rue des Francs-Bourgeois and Rue Vieille du Temple; Merci and Place des Vosges, the oldest square in the city, sit at its centre.', nz:'十七世纪的贵族区，如今是巴黎最时髦的街区。独立时装店和概念店沿 Francs-Bourgeois 街和 Vieille du Temple 街分布；中心是 Merci 概念店和全城最古老的广场孚日广场。', q:'Rue des Francs-Bourgeois, 75004 Paris' },
+   { ticket:true, tr_en:'Car, 25 min', tr_zh:'打车 25 分钟', t:'21:00', e:'22:00', en:'Seine river cruise', zh:'塞纳河游船', ne:'An hour-long boat past the illuminated riverside monuments — Notre-Dame, the Louvre, the Orsay — with the Eiffel Tower at both ends of the route.', nz:'一小时的游船，经过灯光照亮的河岸古迹——圣母院、卢浮宫、奥赛——航线两端都能看到埃菲尔铁塔。',
+     tip_en:'Flexible all-day ticket, but this sailing boards by 20:40 at Pontoon 3.',
+     tip_zh:'弹性全日票，但这班船 20:40 在 3 号码头前登船。',
+     q:'Port de la Bourdonnais, Paris' },
+ ]},
+ { d:'2026-09-08', back_en:'Car, 18 min back to hotel.', back_zh:'打车 18 分钟回酒店。', city:'paris', en:'Orsay and the arcades', zh:'奥赛与拱廊街', ev:[
+   { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
+   { ticket:true, tr_en:'Car, 15 min', tr_zh:'打车 15 分钟', t:'09:30', e:'12:30', en:'Musée d\'Orsay', zh:'奥赛博物馆', ne:'The Impressionist collection in a converted 1900 railway station. Monet, Renoir, Degas, Van Gogh and Cézanne under the original iron-and-glass roof and station clock.',
+     nz:'1900 年火车站改建的印象派收藏。莫奈、雷诺阿、德加、梵高、塞尚，陈列在原有的铁与玻璃穹顶和车站大钟之下。',
+     tip_en:'Timed 09:30 — arrive by 09:15. Entrance is on the quay side (Quai Anatole France, along the Seine).\n\nRoute worth planning: 5th floor first (the Impressionist rooms fill up fastest), then 2nd floor, then ground floor for the clock-face window view.',
+     tip_zh:'09:30 定时入场——09:15 前到。入口在河堤一侧（Quai Anatole France，塞纳河边）。\n\n建议路线：先上五楼（印象派展厅最快人满），再下二楼，最后一楼看大钟窗景。',
+     q:'Musée d\'Orsay' },
+   { tr_en:'Car, 12 min', tr_zh:'打车 12 分钟', t:'13:00', e:'14:00', en:'Lunch at Palais Royal', zh:'午餐 · 皇家宫殿', ne:'A café under the arcades of the Palais-Royal, serving light French dishes — salads, tartines, pastries — with tables looking onto the gardens.', nz:'皇家宫殿拱廊下的咖啡馆，供应清淡的法式餐点——沙拉、法式开面三明治、糕点——桌位面向花园。', q:'La Crème du Palais Royal, 39 Galerie de Montpensier, 75001 Paris' },
+   { tr_en:'Walk 2 min', tr_zh:'步行 2 分钟', t:'14:15', e:'15:45', en:'Covered passages', zh:'玻璃顶拱廊街', ne:'Glass-roofed 1820s arcades, the ancestors of the shopping mall. Antiquarian booksellers, stamp and print dealers, and small independent designers under mosaic floors and iron skylights. Galerie Vivienne is the grandest; Stohrer nearby is Paris\'s oldest pâtisserie, known for the rum baba it invented.', nz:'1820 年代的玻璃顶拱廊，购物中心的前身。马赛克地面和铁艺天窗下是古书商、邮票版画商和独立设计师小店。Vivienne 拱廊最气派；附近的 Stohrer 是巴黎最老的甜点店，因发明朗姆巴巴蛋糕而闻名。', q:'Galerie Vivienne, 4 Rue des Petits Champs, 75002 Paris' },
+   { tr_en:'Car, 12 min', tr_zh:'打车 12 分钟', t:'16:00', e:'17:15', en:'Champs-Élysées and the Arc', zh:'香榭丽舍与凯旋门', ne:'Paris\'s grand shopping avenue, running dead straight to the Arc de Triomphe. The upper stretch holds flagship stores — Louis Vuitton\'s largest shop in the world, Dior, Cartier, Sephora — and Ladurée for macarons.',
+     nz:'巴黎的购物大道，笔直通向凯旋门。上半段是旗舰店：全球最大的 Louis Vuitton、Dior、Cartier、Sephora，还有卖马卡龙的 Ladurée。',
+     tip_en:'Use the underpass to reach the arch — never cross the roundabout at street level.',
+     tip_zh:'走地下通道去凯旋门——千万不要在地面直接穿过环岛。',
+     q:'Arc de Triomphe' },
+   { tr_en:'Car, 15 min', tr_zh:'打车 15 分钟', t:'17:30', e:'19:00', en:'Saint-Germain', zh:'圣日耳曼区', ne:'The Left Bank café quarter where Sartre, Beauvoir and Hemingway wrote — narrow streets of art galleries and antique dealers around Rue Bonaparte and Rue de Seine.', nz:'左岸的咖啡馆街区，萨特、波伏娃和海明威曾在此写作——Bonaparte 街和 de Seine 街一带是画廊和古董商聚集的窄巷。', q:'Saint-Germain-des-Prés, Paris' },
+   { t:'19:30', e:'21:00', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
+ ]},
+ { d:'2026-09-09', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'paris', en:'Montmartre and the Eiffel', zh:'蒙马特与铁塔', ev:[
+   { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
+   { tr_en:'Car, 22 min', tr_zh:'打车 22 分钟', t:'09:00', e:'12:00', en:'Montmartre', zh:'蒙马特', ne:'A hilltop village of steep cobbled lanes and a small vineyard, with portrait painters working in Place du Tertre and the white domes of Sacré-Cœur crowning it all, Paris spread out below.', nz:'山顶小村，陡峭的石板巷和一小片葡萄园，肖像画家在小丘广场工作，圣心堂的白色穹顶高踞其上，巴黎全城在脚下展开。', q:'Sacré-Cœur, Paris' },
+   { tr_en:'Car, 28 min', tr_zh:'打车 28 分钟', t:'12:45', e:'14:00', en:'Lunch on Rue Cler', zh:'午餐 · Rue Cler 市集街', ne:'A pedestrian market street — a cheesemonger, a charcuterie, a bakery, greengrocers and café terraces, all within a few hundred metres.', nz:'步行市集街——奶酪店、熟肉铺、面包房、蔬果摊和咖啡露台，都在几百米内。', q:'Rue Cler, 75007 Paris' },
+   { ticket:true, tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'14:15', e:'16:00', en:'Musée Rodin', zh:'罗丹美术馆', ne:'Rodin\'s sculptures in the mansion where he lived and worked, with a rose garden holding The Thinker and The Gates of Hell.',
+     nz:'罗丹的雕塑陈列在他生活工作过的宅邸中，玫瑰园里立着思想者和地狱之门。',
+     tip_en:'Not timed — walk in anytime.',
+     tip_zh:'无需预约时段，随时可进。',
+     q:'Musée Rodin' },
+   { tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'16:15', e:'18:15', en:'Rue du Bac', zh:'Rue du Bac 精品街', ne:'The 7th\'s boutique street. Deyrolle is a 19th-century natural-history shop — mounted animals and butterflies under glass; Buly is a recreated 19th-century apothecary selling perfumes and oils in hand-labelled bottles.', nz:'第七区的精品街。Deyrolle 是十九世纪的自然史商店——玻璃柜里的动物标本和蝴蝶；Buly 是复刻的十九世纪药房，卖着手写标签瓶装的香水和精油。', q:'Deyrolle, 46 Rue du Bac, 75007 Paris' },
+   { ticket:true, tr_en:'Walk 2 min', tr_zh:'步行 2 分钟', t:'18:30', e:'20:15', en:'Dinner at Les Antiquaires', zh:'晚餐 · Les Antiquaires', ne:'A neighbourhood bistro. Known for oysters, snails, and duck breast.', nz:'街坊小酒馆，以生蚝、蜗牛和鸭胸闻名。', q:'Les Antiquaires, 13 Rue du Bac, 75007 Paris' },
+   { ticket:true, tr_en:'Car, 15 min', tr_zh:'打车 15 分钟', t:'21:30', e:'23:00', en:'Eiffel Tower, to the top', zh:'埃菲尔铁塔登顶', ne:'330 metres of iron lattice, built for the 1889 World\'s Fair. The lift takes you to the summit at 276 metres, above the second floor and the whole lit city.',
+     nz:'330 米高的铁塔，为 1889 年世博会而建。电梯带你登上 276 米的顶层，俯瞰二楼和整座灯火通明的城市。',
+     tip_en:'Timed 21:30 — arrive by 21:15.',
+     tip_zh:'21:30 定时入场——21:15 前到。',
+     q:'Eiffel Tower' },
+ ]},
+ { d:'2026-09-10', city:'grind', en:'Into the Alps', zh:'进入阿尔卑斯', ev:[
+   { t:'06:00', e:'06:30', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
+   { ticket:true, tr_en:'Car, 28 min', tr_zh:'打车 28 分钟', t:'07:22', e:'10:26', travel:true, en:'Paris → Basel', zh:'巴黎 → 巴塞尔', ne:'TGV from Gare de Lyon.', nz:'从里昂车站乘 TGV。', tip_en:'Be at the station by 06:50 — boarding closes two minutes before departure.', tip_zh:'06:50 前到车站，发车前两分钟停止登车。', q:'Gare de Lyon, Paris' },
+   { ticket:true, tr_en:'Walk across the station, 10 min', tr_zh:'站内步行 10 分钟', t:'11:30', e:'14:10', travel:true, en:'Basel → Grindelwald', zh:'巴塞尔 → 格林德瓦', ne:'Change at Interlaken Ost. Sit in the rear of the second train — it splits.', nz:'在 Interlaken Ost 换乘。第二班车要坐后半段，列车会分开。', q:'Grindelwald Bahnhof' },
+   { tr_en:'Walk 5 min to hotel', tr_zh:'步行 5 分钟到酒店', t:'Afternoon', e:'', en:'Settle in, walk the village', zh:'安顿下来，逛逛小镇', ne:'Hotel Belvedere is on the main street, and straight ahead is the north face of the Eiger — the most notorious climb in the Alps — filling the view.', nz:'Belvedere 酒店就在主街上，正前方是艾格峰北壁——阿尔卑斯最凶险的攀登路线——占满整个视野。', q:'Hotel Belvedere, Grindelwald' },
+ ]},
+ { d:'2026-09-11', back_en:'Walk 5 min back to hotel.', back_zh:'步行 5 分钟回酒店。', city:'grind', en:'Up the mountain', zh:'上山', ev:[
+   { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
+   { tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'09:00', e:'12:30', en:'Grindelwald First', zh:'菲斯特 First', ne:'A gondola up to a green alpine shelf at 2,168 metres, facing the Eiger, Mönch and Jungfrau. The Cliff Walk is a steel platform bolted to the rock face. Optional rides down: a four-person zipline, a bird-shaped glider, a mountain cart, and a scooter track.', nz:'缆车升到 2168 米的绿色高山台地，正对艾格峰、僧侣峰和少女峰。悬崖步道是钉在岩壁上的钢铁平台。下山可选：四人滑索、鸟形滑翔机、山地卡丁车、滑板车道。', q:'Firstbahn Grindelwald' },
+   { tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'14:00', e:'17:30', en:'Easy afternoon', zh:'轻松的下午', ne:'Pfingstegg has a summer toboggan run and a fly-line through the treetops. The glacier gorge is a walkway through a narrow ravine with meltwater roaring beneath your feet.', nz:'Pfingstegg 有夏季滑道和穿越树顶的滑索。冰川峡谷是一条穿过狭窄峡谷的栈道，冰川融水在脚下轰鸣。', q:'Dorfstrasse, Grindelwald' },
+ ]},
+ { d:'2026-09-12', back_en:'Train 35 min + walk 5 min back to hotel.', back_zh:'火车 35 分钟加步行 5 分钟回酒店。', city:'grind', en:'Lakes and paragliders', zh:'湖与滑翔伞', ev:[
+   { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
+   { tr_en:'Walk 5 min, then train 35 min', tr_zh:'步行 5 分钟，火车 35 分钟', t:'10:00', e:'16:00', en:'Interlaken and Lake Brienz', zh:'因特拉肯与布里恩茨湖', ne:'A resort town between two turquoise lakes. Paragliders land on the lawn through the day; a funicular climbs to a viewpoint over both lakes; boats cross Lake Brienz\'s near-unreal blue water.', nz:'坐落在两个蓝绿色湖泊之间的度假小镇。滑翔伞整天降落在草坪上；缆车爬上俯瞰两湖的观景台；游船划过布里恩茨湖近乎不真实的蓝色湖水。', q:'Interlaken Ost' },
+ ]},
+ { d:'2026-09-13', city:'florence', en:'Over the Alps to Italy', zh:'翻越阿尔卑斯去意大利', ev:[
+   { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
+   { ticket:true, tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'09:17', e:'14:35', travel:true, en:'Grindelwald → Milan', zh:'格林德瓦 → 米兰', ne:'Through the Lötschberg and Simplon tunnels, out of the Alps and down into Italy. Two tight changes — be ready.', nz:'穿过 Lötschberg 和 Simplon 隧道，走出阿尔卑斯进入意大利。两次换乘时间很紧，提前准备。', q:'Milano Centrale' },
+   { ticket:true, tr_en:'Stay in the station, 1h35 wait', tr_zh:'留在车站内，等 1 小时 35 分', t:'16:10', e:'18:04', travel:true, en:'Milan → Florence', zh:'米兰 → 佛罗伦萨', ne:'Frecciarossa, Business cabin, coach 4.', nz:'红箭高铁商务舱，4 车厢。', q:'Firenze Santa Maria Novella' },
+   { tr_en:'Walk 12 min to hotel', tr_zh:'步行 12 分钟到酒店', t:'20:00', e:'21:30', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
+ ]},
+ { d:'2026-09-14', city:'florence', en:'A slow shopping day', zh:'慢悠悠的购物日', ev:[
+   { t:'09:00', e:'09:30', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
+   { tr_en:'Walk 12 min', tr_zh:'步行 12 分钟', t:'10:00', e:'10:45', en:'Santa Maria Novella pharmacy', zh:'圣母百花药房', ne:'A perfumery founded by Dominican friars in 1221, open to the public since 1612. Frescoed rooms and glass apothecary cabinets sell perfumes, soaps and rose water, including scents originally made for Catherine de\'Medici.', nz:'1221 年由多明我会修士创立的香水药房，1612 年起向公众开放。壁画房间和玻璃药柜陈列香水、香皂和玫瑰水，包括当年为美第奇王后卡特琳调制的香型。', q:'Officina Profumo-Farmaceutica di Santa Maria Novella' },
+   { tr_en:'Walk 4 min', tr_zh:'步行 4 分钟', t:'10:50', e:'11:45', en:'Via della Spada', zh:'Via della Spada 小巷', ne:'A quiet lane of Florentine craft workshops — hand-marbled paper, bookbinders, small leather ateliers.', nz:'安静的佛罗伦萨手工艺小巷——手工大理石纹纸、装订匠、小型皮具作坊。', q:'Via della Spada, Firenze' },
+   { tr_en:'Walk 2 min', tr_zh:'步行 2 分钟', t:'11:45', e:'12:45', en:'Via de\'Tornabuoni', zh:'Tornabuoni 大街', ne:'Florence\'s luxury shopping street, lined with Renaissance palazzi — Gucci and Ferragamo among the houses that now trade under their stone façades.', nz:'佛罗伦萨的奢侈品购物街，两侧是文艺复兴宫殿——Gucci 和 Ferragamo 如今在这些石墙宫殿下营业。', q:'Via de\'Tornabuoni, Firenze' },
+   { tr_en:'Walk 12 min', tr_zh:'步行 12 分钟', t:'13:00', e:'14:30', en:'Lunch at Mercato Centrale', zh:'午餐 · 中央市场', ne:'An 1874 iron-and-glass market hall. Butchers and cheesemongers on the ground floor; a food hall upstairs with counters for pasta, steak, pizza and wine.', nz:'1874 年的铁与玻璃市场大厅。楼下是肉铺和奶酪店；楼上是美食广场，各摊位供应意面、牛排、披萨和葡萄酒。', q:'Mercato Centrale Firenze' },
+   { tr_en:'Walk 2 min', tr_zh:'步行 2 分钟', t:'14:30', e:'16:00', en:'San Lorenzo leather market', zh:'圣洛伦佐皮革市场', ne:'Open-air stalls around the church of San Lorenzo selling leather jackets, bags and belts.', nz:'圣洛伦佐教堂周围的露天摊位，卖皮夹克、皮包和皮带。', q:'Mercato di San Lorenzo, Firenze' },
+   { t:'20:00', e:'21:30', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
+ ]},
+ { d:'2026-09-15', back_en:'Walk 13 min back to hotel.', back_zh:'步行 13 分钟回酒店。', city:'florence', en:'David and the dome', zh:'大卫与穹顶', ev:[
+   { t:'08:15', e:'08:45', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
+   { ticket:true, tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'09:00', e:'10:30', en:'Galleria dell\'Accademia', zh:'学院美术馆', ne:'A small museum built around one work: Michelangelo\'s David, carved at twenty-six from a marble block two other sculptors had abandoned. The unfinished Prisoners line the hall leading to him.',
+     nz:'一座围绕单一作品建立的小型美术馆：米开朗基罗 26 岁时用一块被另外两位雕塑家放弃的大理石雕出的大卫像。通往他的走廊两侧陈列着未完成的囚徒像。',
+     tip_en:'Don\'t forget to bring the David perler beads!\n\nTimed 09:00 — arrive by 08:45.',
+     tip_zh:'别忘了带大卫拼豆！\n\n09:00 定时入场——08:45 前到。',
+     q:'Galleria dell\'Accademia, Firenze' },
+   { tr_en:'Walk 12 min', tr_zh:'步行 12 分钟', t:'10:45', e:'12:00', en:'Lunch at Sant\'Ambrogio market', zh:'午餐 · 圣安布罗焦市场', ne:'A covered hall of butchers, cheesemongers and delis. Il Trippaio\'s cart out front sells lampredotto — Florence\'s tripe sandwich, simmered and served on a crusty roll — and Trattoria da Rocco inside does cheap hot pasta, ribollita and roast meats at shared tables.', nz:'一座有肉铺、奶酪店和熟食店的室内市场。门口 Il Trippaio 的小车卖 lampredotto——炖牛肚夹在脆皮面包里——市场内的 Trattoria da Rocco 则供应便宜的热意面、蔬菜浓汤 ribollita 和烤肉，大家共用长桌用餐。', q:'Mercato di Sant\'Ambrogio, Firenze' },
+   { ticket:true, tr_en:'Walk 12 min', tr_zh:'步行 12 分钟', t:'12:45', e:'15:00', en:'Duomo', zh:'圣母百花大教堂', ne:'Brunelleschi\'s dome, completed in 1436 without scaffolding — still the largest brick dome ever built. The climb runs between its two shells, past Vasari\'s Last Judgment fresco, to the lantern above the whole city.',
+     nz:'布鲁内莱斯基的穹顶，1436 年在没有脚手架的情况下建成——至今仍是世界最大的砖砌穹顶。攀登路线穿过穹顶的双层壳，经过瓦萨里的《最后的审判》壁画，到达俯瞰全城的顶塔。',
+     tip_en:'Dome slot: 12:45, fixed — be at the dome entrance by 12:40.\n\nCathedral, Baptistery and the Duomo Museum are NOT time-fixed.',
+     tip_zh:'穹顶时段：12:45，固定——12:40 前到穹顶入口。\n\n教堂、洗礼堂和大教堂博物馆不限时段。',
+     q:'Duomo di Firenze' },
+   { tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'15:00', e:'15:20', en:'Gelato at Vivoli', zh:'冰淇淋 · Vivoli', ne:'Florence\'s most famous gelateria, since 1929. Traditional flavours, served in cups only.', nz:'1929 年开业，佛罗伦萨最有名的冰淇淋店。传统口味，只有杯装。', q:'Vivoli, Firenze' },
+   { tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'15:25', e:'16:00', en:'Via dei Cerchi', zh:'Via dei Cerchi 小巷', ne:'A narrow lane between the Duomo and the Signoria. Firenzeraku at no. 11 makes clocks and watches by hand.', nz:'大教堂和领主广场之间的窄巷。11 号的 Firenzeraku 手工制作钟表。', q:'Firenzeraku, Via dei Cerchi 11R, Firenze' },
+   { tr_en:'Walk 3 min', tr_zh:'步行 3 分钟', t:'16:00', e:'16:45', en:'Piazza della Signoria', zh:'领主广场', ne:'Florence\'s civic square for seven centuries — an open-air sculpture gallery: Neptune\'s fountain, a copy of David where the original once stood, and the Loggia dei Lanzi, where you can walk among Cellini\'s Perseus and Giambologna\'s marble groups.', nz:'佛罗伦萨七百年来的市政广场——露天雕塑馆：海神喷泉、原址上的大卫复制品，还有兰齐凉廊，可以走近切利尼的珀尔修斯和詹博洛尼亚的大理石群雕。', q:'Piazza della Signoria, Firenze' },
+   { tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'16:45', e:'17:45', en:'Ponte Vecchio', zh:'老桥', ne:'A 1345 bridge lined with jewellers\' shops on both sides — the only bridge in Florence the retreating Germans didn\'t destroy in 1944.', nz:'1345 年建成的桥，两侧都是珠宝金饰店——1944 年德军撤退时唯一没被摧毁的佛罗伦萨桥梁。', q:'Ponte Vecchio, Firenze' },
+   { ticket:true, tr_en:'Walk 15 min', tr_zh:'步行 15 分钟', t:'19:00', e:'20:30', en:'Dinner at L\'Osteria di Giovanni', zh:'晚餐 · Osteria di Giovanni', ne:'A family-run Tuscan restaurant. Known for bistecca alla fiorentina — a thick T-bone steak grilled rare — and a signature fried bread served at the table.', nz:'家族经营的托斯卡纳餐厅，以佛罗伦萨大牛排（厚切丁骨牛排，煎至三分熟）闻名，招牌是上桌时附送的炸面包。', q:'L\'Osteria di Giovanni, Via del Moro 22r, Firenze' },
+ ]},
+ { d:'2026-09-16', city:'florence', en:'The Uffizi and the other bank', zh:'乌菲兹与河对岸', ev:[
+   { t:'08:15', e:'08:45', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
+   { ticket:true, tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'09:00', e:'12:00', en:'Uffizi Gallery', zh:'乌菲兹美术馆', ne:'The Medici\'s former offices, now the world\'s largest collection of Renaissance painting, arranged chronologically from medieval gold-ground panels to Caravaggio. Botticelli\'s Birth of Venus is the most visited work.',
+     nz:'美第奇家族的旧办公楼，如今是世界最大的文艺复兴绘画收藏，按年代从中世纪金底画板排到卡拉瓦乔。波提切利的《维纳斯的诞生》是最多人前来看的作品。',
+     tip_en:'Timed 09:00 — arrive by 08:45.\n\nEntrance at Door 1.\n\nRoute worth planning: head straight to Botticelli (2nd floor, Room A9) first, then move chronologically.',
+     tip_zh:'09:00 定时入场——08:45 前到。\n\n从 1 号门入场。\n\n建议路线：先直奔波提切利（二楼 A9 室），再按年代顺序参观。',
+     q:'Galleria degli Uffizi, Firenze' },
+   { t:'12:30', e:'13:30', en:'Lunch', zh:'午餐', ne:'', nz:'' },
+   { tr_en:'Walk 10 mins from Uffizi', tr_zh:'从乌菲兹步行 10 分钟', t:'14:00', e:'15:30', en:'Oltrarno and Santo Spirito', zh:'奥尔特拉诺与圣灵区', ne:'The artisan side of the river — leatherworkers, gilders and framers still working in open-fronted studios along Borgo San Jacopo and Via di Santo Spirito. Piazza Santo Spirito is where locals gather in the evening.', nz:'河对岸的手工艺区——皮具匠、镀金匠和画框匠仍在 Borgo San Jacopo 和 Via di Santo Spirito 的敞开门面作坊里工作。圣灵广场是本地人傍晚聚集的地方。', q:'Piazza Santo Spirito, Firenze' },
+   { ticket:true, tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'15:30', e:'17:30', en:'Boboli Gardens', zh:'波波里花园', ne:'The Medici\'s hillside garden behind Pitti Palace, the model for Versailles. Cypress avenues climb past grottoes, fountains, and an amphitheatre where the first opera was staged in 1600.',
+     nz:'皮蒂宫后美第奇家族的山坡花园，凡尔赛宫的原型。柏树大道爬过洞穴、喷泉，还有一座露天剧场——1600 年第一部歌剧在此上演。',
+     tip_en:'Entry timed 15:30 — arrive by 15:20.\n\n1. Enter via Pitti Palace, the main gate off the courtyard.\n2. Walk uphill through the gardens as you climb toward the top of the hill.\n3. Exit via Forte di Belvedere, at the top.\n4. Walk along the scenic, tree-lined historic walls to Piazzale Michelangelo.',
+     tip_zh:'15:30 定时入场——15:20 前到。\n\n1. 从皮蒂宫正门（庭院旁）进入。\n2. 沿花园上坡走，一路爬向山顶。\n3. 从山顶的贝尔维德雷堡出口离开。\n4. 沿着风景优美、树荫夹道的古城墙走到米开朗基罗广场。',
+     q:'Giardino di Boboli, Firenze' },
+   { tr_en:'Walk 25 min, or car 10 min', tr_zh:'步行 25 分钟，或打车 10 分钟', t:'18:00', e:'19:30', en:'Piazzale Michelangelo', zh:'米开朗基罗广场', ne:'A terrace on the hill across the river with the whole city laid out below — the Duomo, the towers, the Arno and its bridges. Best at sunset.', nz:'河对岸山上的露台，整座城市铺展在脚下——大教堂、塔楼、阿诺河和它的桥。日落时最美。', q:'Piazzale Michelangelo, Firenze' },
+   { t:'20:15', e:'21:45', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
+ ]},
+ { d:'2026-09-17', city:'rome', en:'South to Rome', zh:'南下罗马', ev:[
+   { t:'08:45', e:'09:15', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
+   { ticket:true, tr_en:'Car, 6 min', tr_zh:'打车 6 分钟', t:'10:14', e:'11:51', travel:true, en:'Florence → Rome', zh:'佛罗伦萨 → 罗马', ne:'Frecciarossa, Business cabin, coach 5. The hotel is on the station square.', nz:'红箭高铁商务舱，5 车厢。酒店就在车站广场上。', q:'Roma Termini' },
+   { tr_en:'Walk 2 min to hotel', tr_zh:'步行 2 分钟到酒店', t:'12:15', e:'13:30', en:'Lunch', zh:'午餐', ne:'', nz:'' },
+   { tr_en:'Car from the hotel, 12 min', tr_zh:'从酒店打车 12 分钟', t:'13:45', e:'15:30', en:'Via dei Coronari', zh:'Via dei Coronari 古董街', ne:'Rome\'s antiques street — old prints, lamps and silver in shopfronts along a lane once walked by pilgrims to St. Peter\'s. Via del Governo Vecchio runs parallel with vintage clothing; Ai Monasteri nearby sells only goods made by monks — liqueurs, honeys, soaps.', nz:'罗马的古董街——旧版画、灯具和银器陈列在这条曾是朝圣者通往圣彼得大教堂之路的沿街店铺里。旁边的 Governo Vecchio 街平行分布着复古服饰店；附近的 Ai Monasteri 只卖修士制作的东西——利口酒、蜂蜜、香皂。', q:'Via dei Coronari, Roma' },
+   { tr_en:'Walk 3 min', tr_zh:'步行 3 分钟', t:'15:30', e:'15:55', en:'Piazza Navona', zh:'纳沃纳广场', ne:'A long Baroque square shaped like the Roman stadium it was built on, with Bernini\'s Fountain of the Four Rivers at its centre and cafés around the edge.', nz:'建在古罗马竞技场遗址上的巴洛克长形广场，中央是贝尔尼尼的四河喷泉，四周环绕着咖啡馆。', q:'Piazza Navona, Roma' },
+   { ticket:true, tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'16:00', e:'17:00', en:'Pantheon', zh:'万神殿', ne:'Built by Hadrian in 126 AD and never fallen down — the best-preserved building of ancient Rome. Its concrete dome is still the largest unreinforced one in the world, open to the sky through the oculus.',
+     nz:'哈德良皇帝公元 126 年所建，从未倒塌——古罗马保存最完好的建筑。混凝土穹顶至今仍是世界最大的无钢筋穹顶，正中的孔洞向天空敞开。',
+     tip_en:'Timed entry window 16:00–17:00.',
+     tip_zh:'16:00–17:00 定时入场时段。',
+     q:'Pantheon, Roma' },
+   { tr_en:'Walk 3 min', tr_zh:'步行 3 分钟', t:'17:05', e:'17:35', en:'Sant\'Ignazio', zh:'圣依纳爵堂', ne:'A Baroque church where the Jesuits ran out of money for a dome, so in 1685 Andrea Pozzo painted one on the flat ceiling instead — stand on the marble disc in the floor and it looks entirely real.', nz:'巴洛克教堂，耶稣会当年没钱建穹顶，1685 年安德烈亚·波佐就在平顶上画了一个——站在地面的大理石圆盘上看，逼真得完全像真的。', q:'Chiesa di Sant\'Ignazio di Loyola, Roma' },
+   { t:'20:15', e:'21:45', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
+ ]},
+ { d:'2026-09-18', city:'rome', en:'Ancient Rome', zh:'古罗马', ev:[
+   { t:'08:30', e:'09:10', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
+   { tr_en:'Car, 10 min', tr_zh:'打车 10 分钟', t:'09:30', e:'10:15', en:'Trevi Fountain', zh:'特莱维喷泉', ne:'A vast Baroque fountain filling a small square — Neptune driving sea-horses out of the palace wall behind it.', nz:'挤满小广场的巨型巴洛克喷泉——海神驾着海马从后方的宫殿墙面奔出。', q:'Fontana di Trevi, Roma' },
+   { tr_en:'Walk 12 min', tr_zh:'步行 12 分钟', t:'10:25', e:'11:45', en:'Spanish Steps and Via Margutta', zh:'西班牙台阶与 Via Margutta', ne:'A hundred and thirty-five steps climbing to a French church built in 1725. Via Margutta beside it is an ivy-covered lane of artists\' studios where Roman Holiday was filmed; Bottega del Marmoraro carves marble plaques to order while you wait.', nz:'135 级台阶通向一座建于 1725 年的法国教堂。旁边的 Margutta 街是常春藤覆盖的艺术家工作室小巷，《罗马假日》曾在此取景；Bottega del Marmoraro 可以现场刻制大理石牌。', q:'Piazza di Spagna, Roma' },
+   { ticket:true, tr_en:'Car, 15 min', tr_zh:'打车 15 分钟', t:'12:30', e:'13:45', en:'Colosseum', zh:'斗兽场', ne:'The gladiator arena of ancient Rome, two thousand years old, that once seated fifty thousand. Walk the tiers and look down onto the arena floor and the exposed underground tunnels.',
+     nz:'两千年前古罗马的角斗场，曾容纳五万观众。沿看台走一圈，俯瞰竞技场地面和下方裸露的地下通道。',
+     tip_en:'Timed 12:30 — be at the gate by 12:15.\n\nRoute worth planning: Colosseum first, then exit to walk the Forum and up the Palatine — no re-entry once you leave, so it\'s one continuous visit.',
+     tip_zh:'12:30 定时入场——12:15 前到入口。\n\n建议路线：先看斗兽场，再出去走古罗马广场和帕拉蒂尼山——一旦离开不能再进，需一次走完。',
+     q:'Colosseo, Roma' },
+   { tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'14:00', e:'15:15', en:'Lunch at La Nuova Piazzetta', zh:'午餐 · La Nuova Piazzetta', ne:'A pasta restaurant in Monti. Known for fresh, hand-made pasta — pesto with clams and burrata, cacio e pepe — and a tiramisu served in a mini moka pot.', nz:'Monti 区的意面餐厅，以新鲜手工意面闻名——蛤蜊布拉塔青酱意面、黑椒芝士意面——提拉米苏用迷你摩卡壶盛装上桌。', q:'La Nuova Piazzetta, Vicolo del Buon Consiglio, Roma' },
+   { tr_en:'Already there', tr_zh:'就在附近', t:'15:15', e:'16:30', en:'Monti', zh:'Monti 区', ne:'Rome\'s oldest neighbourhood, once its slum — now cobbled lanes of independent shops, wine bars and vintage clothing.', nz:'罗马最古老的街区，曾是贫民窟——如今是石板小巷里的独立小店、酒吧和复古服饰店。', q:'Via del Boschetto, Roma' },
+   { tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'16:45', e:'18:45', en:'Roman Forum and Palatine Hill', zh:'古罗马广场与帕拉蒂尼山', ne:'The centre of the Roman world for a thousand years — the Senate, the temples, the road every triumph marched down. The Palatine Hill above it is where the emperors built their palaces, the origin of the word itself.',
+     nz:'一千年来罗马世界的中心——元老院、神庙，还有每一次凯旋游行走过的大道。上方的帕拉蒂尼山是皇帝们建造宫殿的地方，"宫殿"（palace）一词正源于此。',
+     tip_en:'Same ticket as the Colosseum, valid 24h — not separately timed. But no re-entry once you exit the whole park, so this follows straight on from the Colosseum.',
+     tip_zh:'与斗兽场同一张票，24 小时有效——不单独定时。但离开整个园区后不能再进，所以要接着斗兽场一起走完。',
+     q:'Foro Romano, Roma' },
+   { t:'20:00', e:'21:30', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
+ ]},
+ { d:'2026-09-19', back_en:'Car, ~18 min back to hotel (once dinner spot is chosen; you\'ll be in or near Trastevere).', back_zh:'选定晚餐地点后，预计打车约 18 分钟回酒店（你会在特拉斯提弗列附近）。', city:'rome', en:'The Vatican and Trastevere', zh:'梵蒂冈与特拉斯提弗列', ev:[
+   { t:'08:20', e:'09:00', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
+   { tr_en:'Car, 20 min', tr_zh:'打车 20 分钟', t:'09:30', e:'11:15', en:'St. Peter\'s Basilica', zh:'圣彼得大教堂', ne:'The largest church in the world, built over the tomb of the apostle Peter. Michelangelo designed the dome, and carved the Pietà just inside the door when he was twenty-four.',
+     nz:'世界最大的教堂，建在使徒彼得的墓上。米开朗基罗设计了穹顶，24 岁时雕刻了门内的《圣殇》。',
+     tip_en:'Arrive by 09:15 — free entry, but a reserved-entry ticket is worth getting to skip the queue.\n\nRoute: the Pietà is on the right just inside the entrance — see it before the crowd builds, then the nave and Bernini\'s altar canopy. No photography inside.',
+     tip_zh:'09:15 前到——免费入场，但值得买张预约票以避开排队。\n\n路线：一进门右手边就是圣殇像——趁人少先看，再看中殿和贝尔尼尼的祭坛华盖。里面不能拍照。',
+     q:'St. Peter\'s Basilica' },
+   { t:'11:30', e:'12:45', en:'Lunch', zh:'午餐', ne:'', nz:'' },
+   { tr_en:'Walk from St. Peter\'s, 10 min', tr_zh:'从圣彼得大教堂步行 10 分钟', t:'13:00', e:'14:15', en:'Castel Sant\'Angelo', zh:'圣天使堡', ne:'Built as Emperor Hadrian\'s tomb in 139 AD, later the fortress the popes fled to through a secret raised passage from the Vatican. Bernini\'s angels line the bridge in front; on top, the archangel Michael sheathes his sword.',
+     nz:'公元 139 年建为哈德良皇帝的陵墓，后来成为教皇经由梵蒂冈秘密高架通道逃往的堡垒。贝尔尼尼的天使列在前方的桥上；顶端，大天使米迦勒正收剑入鞘。',
+     tip_en:'The bridge and its view are free. Going inside the castle needs a separate ticket — worth booking ahead, especially on a Saturday.',
+     tip_zh:'桥和景观免费。要进城堡内部需另外买票——建议提前预订，尤其是周六。',
+     q:'Castel Sant\'Angelo, Roma' },
+   { tr_en:'Car 10 min, or walk 20 min along the river', tr_zh:'打车 10 分钟，或沿河步行 20 分钟', t:'14:45', e:'18:30', en:'Trastevere', zh:'特拉斯提弗列', ne:'The old working-class quarter across the river, now Rome\'s most atmospheric — ivy over ochre walls, cobbled lanes, laundry strung between windows. Santa Maria in Trastevere holds gold mosaics from 1140.', nz:'河对岸曾经的工人区，如今是罗马最有情调的角落——赭色墙上的常春藤、石板路，窗户间晾着的衣物。特拉斯提弗列圣母大殿藏有 1140 年的金色马赛克。', q:'Piazza di Santa Maria in Trastevere, Roma' },
+   { t:'20:00', e:'21:45', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
+ ]},
+ { d:'2026-09-20', city:'rome', en:'Flying home', zh:'回家', ev:[
+   { t:'07:00', e:'07:25', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
+   { ticket:true, tr_en:'Car, 48 min', tr_zh:'打车 48 分钟', t:'11:40', e:'06:00', travel:true, en:'Rome → Singapore', zh:'罗马 → 新加坡', ne:'SQ365', nz:'新航 SQ365', q:'Fiumicino Airport' },
+ ]},
+];
+
+// ---------------- APP ----------------
+let lang = 'en';
+let idx = 0;
+
+const $ = s => document.querySelector(s);
+const route = $('#route'), strip = $('#strip'), view = $('#dayView');
+const DOW_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DOW_ZH = ['周日','周一','周二','周三','周四','周五','周六'];
+const MON_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function mapUrl(q){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
+function dateObj(d){ const [y,m,dd]=d.split('-').map(Number); return new Date(y,m-1,dd); }
+function todayIdx(){
+  const now = new Date(); const t = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  return DAYS.findIndex(x=>x.d===t);
+}
+function applyStatic(){
+  document.querySelectorAll('[data-en]').forEach(el=>{ el.textContent = el.dataset[lang]; });
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on', b.dataset.lang===lang));
+  document.body.classList.toggle('zh', lang==='zh');
+  document.documentElement.lang = lang==='zh' ? 'zh-CN' : 'en';
+}
+function renderRoute(){
+  route.innerHTML = '';
+  const cur = DAYS[idx].city;
+  Object.entries(CITIES).forEach(([k,c])=>{
+    const b = document.createElement('button'); b.type='button';
+    b.className = k===cur ? 'on' : '';
+    b.innerHTML = `<span class="dot"></span><span class="city serif">${lang==='zh'?c.zh:c.en}</span><span class="when">${lang==='zh'?c.when_zh:c.when_en}</span>`;
+    b.addEventListener('click', ()=>{ idx = DAYS.findIndex(d=>d.city===k); render(); });
+    route.appendChild(b);
+  });
+}
+function renderStrip(){
+  strip.innerHTML = '';
+  const tI = todayIdx();
+  DAYS.forEach((day,i)=>{
+    const dt = dateObj(day.d);
+    const b = document.createElement('button'); b.type='button'; b.setAttribute('role','tab');
+    b.className = (i===idx?'on ':'') + (i===tI?'today':'');
+    b.innerHTML = `<span class="dow">${lang==='zh'?DOW_ZH[dt.getDay()]:DOW_EN[dt.getDay()]}</span><span class="num serif">${dt.getDate()}</span>`;
+    b.addEventListener('click', ()=>{ idx=i; render(); });
+    strip.appendChild(b);
+  });
+  const on = strip.querySelector('.on');
+  if(on && typeof on.scrollIntoView === 'function'){
+    try { on.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'}); } catch(err){ /* ignore */ }
+  }
+}
+function renderDay(){
+  const day = DAYS[idx]; const c = CITIES[day.city]; const dt = dateObj(day.d);
+  const dateLine = lang==='zh'
+    ? `${dt.getMonth()+1}月${dt.getDate()}日 ${DOW_ZH[dt.getDay()]}`
+    : `${DOW_EN[dt.getDay()]} ${dt.getDate()} ${MON_EN[dt.getMonth()]}`;
+  const evs = day.ev.map((e,ei)=>{
+    const tr = lang==='zh' ? e.tr_zh : e.tr_en;
+    const note = lang==='zh' ? e.nz : e.ne;
+    const tip = lang==='zh' ? e.tip_zh : e.tip_en;
+    const hasMeta = e.q || tip;
+    return `${tr?`<li class="hop">${tr}</li>`:''}
+    <li class="ev ${e.travel?'travel':''} ${e.ticket?'ticket':''}">
+      <div class="time">${e.notime?'':e.t}${(e.notime||!e.e)?'':`<span class="end">${e.e}</span>`}</div>
+      <div>
+        <div class="name">${lang==='zh'?e.zh:e.en}</div>
+        ${note?`<div class="note">${note}</div>`:''}
+        ${hasMeta?`<div class="meta">
+          ${e.q?`<a class="actionbtn" href="${mapUrl(e.q)}" target="_blank" rel="noopener">${lang==='zh'?'打开地图':'Open in Maps'}</a>`:''}
+          ${tip?`<button type="button" class="actionbtn tip" data-idx="${ei}">${lang==='zh'?'注意事项':'Things to note'}</button>`:''}
+        </div>`:''}
+      </div>
+    </li>`;}).join('');
+  const backText = lang==='zh' ? day.back_zh : day.back_en;
+  const backHtml = backText ? `<li class="hop back">${backText}</li>` : '';
+  view.innerHTML = `
+    <div class="day-head">
+      <h2 class="serif">${dateLine}, ${lang==='zh'?c.zh:c.en}</h2>
+      <p class="where">
+        <a href="${mapUrl(c.hotelq)}" target="_blank" rel="noopener">${c.hotel}</a></p>
+    </div>
+    <ul class="events">${evs}${backHtml}</ul>`;
+  $('#prev').disabled = idx===0;
+  $('#next').disabled = idx===DAYS.length-1;
+
+  document.querySelectorAll('.actionbtn.tip').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const e = DAYS[idx].ev[Number(btn.dataset.idx)];
+      const title = lang==='zh' ? e.zh : e.en;
+      const tip = lang==='zh' ? e.tip_zh : e.tip_en;
+      openSheet(title, tip);
+    });
+  });
+}
+
+function openSheet(title, body){
+  $('#sheetTitle').textContent = title;
+  $('#sheetBody').textContent = body;
+  $('#sheet').classList.add('open');
+  $('#sheetBackdrop').classList.add('open');
+}
+function closeSheet(){
+  $('#sheet').classList.remove('open');
+  $('#sheetBackdrop').classList.remove('open');
+}
+function render(){ applyStatic(); renderRoute(); renderStrip(); renderDay(); try{ window.scrollTo({top: Math.min(window.scrollY, 0), behavior:'auto'}); }catch(err){} }
+
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click', ()=>{ lang=b.dataset.lang; render(); }));
+$('#sheetClose').addEventListener('click', closeSheet);
+$('#sheetBackdrop').addEventListener('click', closeSheet);
+$('#prev').addEventListener('click', ()=>{ if(idx>0){ idx--; render(); } });
+$('#next').addEventListener('click', ()=>{ if(idx<DAYS.length-1){ idx++; render(); } });
+
+// start on today if inside the trip, else day one
+const t = todayIdx(); idx = t>=0 ? t : 0;
+render();
+</script>
+</body>
+</html>

@@ -259,10 +259,10 @@ const CITIES = {
 const DAYS = [
  { d:'2026-09-06',
    ride:'Aéroport Paris-Charles de Gaulle Terminal 1, 95700 Roissy-en-France',
-   back_en:'Car, 50 min to hotel.', back_zh:'打车 50 分钟到酒店。', city:'paris', en:'Flying out', zh:'出发', ev:[
+   back_en:'Car, 50 min to hotel.', back_zh:'打车 50 分钟到酒店。', city:'paris', ev:[
    { ticket:true, t:'13:35', e:'21:15', travel:true, en:'Singapore → Paris', zh:'新加坡 → 巴黎', ne:'SQ338', nz:'新航 SQ338', tip_en:'At passport control, use the Accès N°1 lane — keep your boarding pass ready.', tip_zh:'过边检时走 Accès N°1 通道——保留登机牌备查。' },
  ]},
- { d:'2026-09-07', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'paris', en:'Museums and the islands', zh:'博物馆与河心岛', ev:[
+ { d:'2026-09-07', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'paris', ev:[
    { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { ticket:true, tr_en:'Car, 18 min', tr_zh:'打车 18 分钟', t:'09:00', e:'12:00', en:'Louvre', zh:'卢浮宫', ne:'The world\'s largest museum, in a former royal palace on the Seine. The headline works are the Mona Lisa, the Venus de Milo, and the Winged Victory of Samothrace at the top of the grand staircase, alongside thousands of European paintings and antiquities across three wings.', nz:'塞纳河畔一座前王宫，如今是世界最大的博物馆。代表作是蒙娜丽莎、断臂维纳斯，以及大阶梯顶端的胜利女神像，三大展馆还藏有数千件欧洲绘画与古物。',
      tip_en:'Don\'t forget to bring the Winged Victory perler beads!\n\nTimed 09:00 — arrive by 08:45.\n\nMultiple entrances: use Carrousel du Louvre (99 Rue de Rivoli), not the Pyramid — the queue is shorter. Look for large red \'Carrousel du Louvre\' signs and stairs/escalators down from street level; it\'s a discreet doorway, easy to walk past. Head down and follow the shops until you see the glass inverted pyramid — the security hall for timed tickets is right there.\n\nIf the car can\'t stop on Rue de Rivoli, the drop-off is at Place du Carrousel, between the Pyramid and the small triumphal arch — stairs on either side of the arch (behind a low wall) lead down into the same underground complex.\n\nRoute worth planning: Denon wing first — Winged Victory → Mona Lisa (Room 711) → Grande Galerie → Room 700 — then cross to Sully for Venus de Milo. No re-entry once you leave.',
@@ -288,7 +288,7 @@ const DAYS = [
      tip_zh:'弹性全日票，但这班船 20:40 在 3 号码头前登船。',
      q:'Bateaux Parisiens, Port de la Bourdonnais, 75007 Paris' },
  ]},
- { d:'2026-09-08', back_en:'Car, 18 min back to hotel.', back_zh:'打车 18 分钟回酒店。', city:'paris', en:'Orsay and the arcades', zh:'奥赛与拱廊街', ev:[
+ { d:'2026-09-08', back_en:'Car, 18 min back to hotel.', back_zh:'打车 18 分钟回酒店。', city:'paris', ev:[
    { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { ticket:true, tr_en:'Car, 15 min', tr_zh:'打车 15 分钟', t:'09:30', e:'12:30', en:'Musée d\'Orsay', zh:'奥赛博物馆', ne:'The Impressionist collection in a converted 1900 railway station. Monet, Renoir, Degas, Van Gogh and Cézanne under the original iron-and-glass roof and station clock.',
      nz:'1900 年火车站改建的印象派收藏。莫奈、雷诺阿、德加、梵高、塞尚，陈列在原有的铁与玻璃穹顶和车站大钟之下。',
@@ -308,7 +308,7 @@ const DAYS = [
      q:'Église Saint-Germain-des-Prés, 3 Place Saint-Germain des Prés, 75006 Paris' },
    { t:'19:30', e:'21:00', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
  ]},
- { d:'2026-09-09', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'paris', en:'Montmartre and the Eiffel', zh:'蒙马特与铁塔', ev:[
+ { d:'2026-09-09', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'paris', ev:[
    { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { tr_en:'Car, 22 min', tr_zh:'打车 22 分钟', t:'09:00', e:'12:00', en:'Montmartre', zh:'蒙马特', ne:'A hilltop village of steep cobbled lanes and a small vineyard, with portrait painters working in Place du Tertre and the white domes of Sacré-Cœur crowning it all, Paris spread out below.', nz:'山顶小村，陡峭的石板巷和一小片葡萄园，肖像画家在小丘广场工作，圣心堂的白色穹顶高踞其上，巴黎全城在脚下展开。',      tip_en:'A car cannot reach the front of the basilica — it is all stairs — so the drop-off is at the foot of the hill. Take the funicular up from there: a métro ticket covers it and it saves about 300 steps. Then walk the village downhill.\n\nSacré-Cœur — free to enter, open from 06:00. The dome is a separate ticket and 280 more steps, open from 09:00 in September.\nPlace du Tertre, two minutes west, where the portrait painters set up.\nSaint-Pierre de Montmartre beside it — one of the oldest churches in the city, and usually empty.\nDown Rue des Saules past the vineyard, La Maison Rose and Au Lapin Agile.\nRue de l\'Abreuvoir, the prettiest street on the hill, then Rue Lepic down to the Moulin de la Galette windmill.\nOut at Place des Abbesses — the Art Nouveau métro entrance, and the wall of I love yous in the square beside it.\n\nStarting at the top gets you the basilica before the coach parties, and leaves the whole walk downhill. The car picks up at Abbesses.',
      tip_zh:'车上不到教堂正门——全是台阶——所以在山脚下车，从那里坐缆索车上去：用一张地铁票即可，省下约 300 级台阶。然后一路往下走完整个山村。\n\n圣心堂——免费入内，06:00 开门。登穹顶要另买票，再爬 280 级台阶，九月 09:00 开放。\n往西走两分钟到帖特尔广场，画肖像的画家都在那里。\n旁边是圣皮埃尔教堂——全城最古老的教堂之一，通常没什么人。\n沿 Rue des Saules 往下，经过葡萄园、粉红小屋和狡兔酒吧。\n再走 Rue de l\'Abreuvoir，山上最漂亮的一条街，然后沿 Rue Lepic 下到煎饼磨坊风车。\n从 Place des Abbesses 出来——新艺术风格的地铁口，旁边小广场上就是我爱你墙。\n\n从山顶开始既能赶在旅游团之前进教堂，全程也都是下坡。车在 Abbesses 接。',
@@ -327,29 +327,29 @@ const DAYS = [
      tip_zh:'21:30 定时入场——21:15 前到。\n\n持电梯票从东塔柱或西塔柱进——挂绿旗的通道。票上会写是哪一根；四根塔柱之间要走好几分钟，所以下车前先看清楚。\n\n入口有安检——查包和金属探测，5 到 10 分钟。\n\n登顶要在二层换第二部电梯。最后一班上顶层的电梯是 22:30，所以先直接上顶，下来时再看二层。',
      q:'Pilier Est, Tour Eiffel, 75007 Paris' },
  ]},
- { d:'2026-09-10', city:'grind', en:'Into the Alps', zh:'进入阿尔卑斯', ev:[
+ { d:'2026-09-10', city:'grind', ev:[
    { t:'06:00', e:'06:30', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { ticket:true, t:'06:30', e:'07:00', en:'Uber to Gare de Lyon', zh:'Uber 前往里昂车站', ne:'Pre-booked car.', nz:'已预约车辆。' },
    { ticket:true, dirFrom:'Hôtel Marignan Champs-Élysées, 12 Rue de Marignan, 75008 Paris', dirMode:'driving', t:'07:22', e:'10:26', travel:true, en:'Paris → Basel', zh:'巴黎 → 巴塞尔', q:'Gare de Lyon, Paris' },
    { ticket:true, nodir:true, tr_en:'Walk across the station, 10 min', tr_zh:'站内步行 10 分钟', t:'11:30', e:'14:10', travel:true, en:'Basel → Grindelwald', zh:'巴塞尔 → 格林德瓦', tip_en:'The change at Basel SBB is straightforward. Interlaken Ost is the one that needs attention.\n\nThe regional train from Interlaken Ost splits in half at Zweilütschinen: one half uncouples for Lauterbrunnen, the other for Grindelwald.\n\nBefore boarding, check that the destination screen on the side of the carriage explicitly says Grindelwald. The platform board also shows which sector (Sector A or B) is the Grindelwald half.\n\nSaver Day Pass — travel is not tied to a specific train, so missing a connection just means taking the next one.', tip_zh:'巴塞尔 SBB 的换乘很简单，需要格外注意的是 Interlaken Ost。\n\n从 Interlaken Ost 出发的区域列车会在 Zweilütschinen 分成两半：一半开往劳特布龙嫩（Lauterbrunnen），另一半开往格林德瓦（Grindelwald）。\n\n上车前先确认车厢侧面的目的地显示屏写着 Grindelwald。站台指示牌也会标明哪个区段（Sector A 或 B）是往格林德瓦的那一半。\n\n已购一日通票（Saver Day Pass），不绑定固定车次，错过接驳搭下一班即可。', q:'Grindelwald Bahnhof' },
    { tr_en:'Walk 5 min to hotel', tr_zh:'步行 5 分钟到酒店', t:'Evening', e:'', en:'Dorfstrasse', zh:'Dorfstrasse 主街', ne:'The village main street — shops, restaurants and bars. The hotel is on it at number 53, with the north face of the Eiger filling the view.', nz:'小镇主街——商店、餐厅和酒吧。酒店就在街上 53 号，正对艾格峰北壁。', q:'Dorfstrasse, Grindelwald' },
  ]},
- { d:'2026-09-11', back_en:'Walk 5 min back to hotel.', back_zh:'步行 5 分钟回酒店。', city:'grind', en:'Up the mountain', zh:'上山', ev:[
+ { d:'2026-09-11', back_en:'Walk 5 min back to hotel.', back_zh:'步行 5 分钟回酒店。', city:'grind', ev:[
    { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { tr_en:'Walk 19 min', tr_zh:'步行 19 分钟', t:'08:30', e:'12:15', en:'Grindelwald First', zh:'菲斯特 First', ne:'A gondola up to a green alpine shelf at 2,168 metres, facing the Eiger, Mönch and Jungfrau. The Cliff Walk at the top, then the four rides all the way back down to the village.', nz:'缆车升到 2168 米的绿色高山台地，正对艾格峰、僧侣峰和少女峰。先在山顶走悬崖步道，再靠四项设施一路玩回镇上。', tip_en:'The order matters — each ride starts where the last one ends, so you never ride back up.\n\nGondola up, 25 minutes to First.\nCliff Walk — a steel walkway and suspension bridge at the top station.\nFirst Flyer — 800 m cable, First down to Schreckfeld at up to 84 km/h.\nFirst Glider — towed backwards from Schreckfeld up to First, then flies forward back down, so it starts and finishes at Schreckfeld.\nMountain Cart — 3 km of gravel, Schreckfeld down to Bort, about 380 m of descent.\nTrottibike — 5 km on a scooter, Bort down to Grindelwald, 566 m of descent, finishing in the village.\n\nAll four rides need an Adventure Package on top of the gondola ticket. Buy it at the valley station before going up.', tip_zh:'顺序很重要——每一项的起点就是上一项的终点，全程不用再坐缆车上山。\n\n缆车上山，25 分钟到 First。\n悬崖步道 Cliff Walk——山顶站旁的钢制栈道和吊桥。\nFirst Flyer——800 米钢索，从 First 滑到 Schreckfeld，时速最高 84 公里。\nFirst Glider——从 Schreckfeld 倒着拖回 First，再向前俯冲下来，起点终点都在 Schreckfeld。\n山地卡丁车——3 公里碎石道，从 Schreckfeld 到 Bort，落差约 380 米。\nTrottibike 滑板车——5 公里，从 Bort 回格林德瓦，落差 566 米，终点就在镇上。\n\n四项活动都需要在缆车票之外另购 Adventure Package（探险套票），上山前在山谷站买好。', q:'Firstbahn Talstation, Dorfstrasse 187, 3818 Grindelwald' },
    { tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'14:00', e:'17:30', en:'Easy afternoon', zh:'轻松的下午', ne:'Pfingstegg has a summer toboggan run and a fly-line through the treetops. The glacier gorge is a walkway through a narrow ravine with meltwater roaring beneath your feet.', nz:'Pfingstegg 有夏季滑道和穿越树顶的滑索。冰川峡谷是一条穿过狭窄峡谷的栈道，冰川融水在脚下轰鸣。', q:'Dorfstrasse, Grindelwald' },
  ]},
- { d:'2026-09-12', back_en:'Train 35 min + walk 5 min back to hotel.', back_zh:'火车 35 分钟加步行 5 分钟回酒店。', city:'grind', en:'Lakes and paragliders', zh:'湖与滑翔伞', ev:[
+ { d:'2026-09-12', back_en:'Train 35 min + walk 5 min back to hotel.', back_zh:'火车 35 分钟加步行 5 分钟回酒店。', city:'grind', ev:[
    { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { tr_en:'Walk 5 min, then train 35 min', tr_zh:'步行 5 分钟，火车 35 分钟', t:'10:00', e:'16:00', en:'Interlaken and Lake Brienz', zh:'因特拉肯与布里恩茨湖', ne:'A resort town between two turquoise lakes. Paragliders land on the lawn through the day; a funicular climbs to a viewpoint over both lakes; boats cross Lake Brienz\'s near-unreal blue water.', nz:'坐落在两个蓝绿色湖泊之间的度假小镇。滑翔伞整天降落在草坪上；缆车爬上俯瞰两湖的观景台；游船划过布里恩茨湖近乎不真实的蓝色湖水。', q:'Interlaken Ost' },
  ]},
- { d:'2026-09-13', city:'florence', en:'Over the Alps to Italy', zh:'翻越阿尔卑斯去意大利', ev:[
+ { d:'2026-09-13', city:'florence', ev:[
    { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { ticket:true, dirFrom:'Hotel Belvedere, Dorfstrasse 53, 3818 Grindelwald', dirTo:'Grindelwald Bahnhof', tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'09:17', e:'14:35', travel:true, en:'Grindelwald → Milan', zh:'格林德瓦 → 米兰', ne:'Through the Lötschberg and Simplon tunnels, out of the Alps and down into Italy. Two tight changes — be ready.', nz:'穿过 Lötschberg 和 Simplon 隧道，走出阿尔卑斯进入意大利。两次换乘时间很紧，提前准备。', q:'Milano Centrale' },
    { ticket:true, nodir:true, tr_en:'Stay in the station, 1h35 wait', tr_zh:'留在车站内，等 1 小时 35 分', t:'16:10', e:'18:04', travel:true, en:'Milan → Florence', zh:'米兰 → 佛罗伦萨', ne:'Frecciarossa, Business cabin, coach 4.', nz:'红箭高铁商务舱，4 车厢。', q:'Firenze Santa Maria Novella' },
    { tr_en:'Walk 12 min to hotel', tr_zh:'步行 12 分钟到酒店', t:'20:00', e:'21:30', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
  ]},
- { d:'2026-09-14', city:'florence', en:'A slow shopping day', zh:'慢悠悠的购物日', ev:[
+ { d:'2026-09-14', city:'florence', ev:[
    { t:'09:00', e:'09:30', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
    { tr_en:'Walk 12 min', tr_zh:'步行 12 分钟', t:'10:00', e:'10:45', en:'Santa Maria Novella pharmacy', zh:'圣母百花药房', ne:'A perfumery founded by Dominican friars in 1221, open to the public since 1612. Frescoed rooms and glass apothecary cabinets sell perfumes, soaps and rose water, including scents originally made for Catherine de\'Medici.', nz:'1221 年由多明我会修士创立的香水药房，1612 年起向公众开放。壁画房间和玻璃药柜陈列香水、香皂和玫瑰水，包括当年为美第奇王后卡特琳调制的香型。', q:'Officina Profumo-Farmaceutica di Santa Maria Novella' },
    { tr_en:'Walk 4 min', tr_zh:'步行 4 分钟', t:'10:50', e:'11:45', en:'Via della Spada', zh:'Via della Spada 小巷', ne:'A quiet lane of Florentine craft workshops — hand-marbled paper, bookbinders, small leather ateliers.', nz:'安静的佛罗伦萨手工艺小巷——手工大理石纹纸、装订匠、小型皮具作坊。', q:'Via della Spada, Firenze' },
@@ -358,7 +358,7 @@ const DAYS = [
    { tr_en:'Walk 2 min', tr_zh:'步行 2 分钟', t:'14:30', e:'16:00', en:'San Lorenzo leather market', zh:'圣洛伦佐皮革市场', ne:'Open-air stalls around the church of San Lorenzo selling leather jackets, bags and belts.', nz:'圣洛伦佐教堂周围的露天摊位，卖皮夹克、皮包和皮带。', q:'Mercato di San Lorenzo, Firenze' },
    { t:'20:00', e:'21:30', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
  ]},
- { d:'2026-09-15', back_en:'Walk 13 min back to hotel.', back_zh:'步行 13 分钟回酒店。', city:'florence', en:'David and the dome', zh:'大卫与穹顶', ev:[
+ { d:'2026-09-15', back_en:'Walk 13 min back to hotel.', back_zh:'步行 13 分钟回酒店。', city:'florence', ev:[
    { t:'08:15', e:'08:45', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
    { ticket:true, tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'09:00', e:'10:30', en:'Galleria dell\'Accademia', zh:'学院美术馆', ne:'A small museum built around one work: Michelangelo\'s David, carved at twenty-six from a marble block two other sculptors had abandoned. The unfinished Prisoners line the hall leading to him.',
      nz:'一座围绕单一作品建立的小型美术馆：米开朗基罗 26 岁时用一块被另外两位雕塑家放弃的大理石雕出的大卫像。通往他的走廊两侧陈列着未完成的囚徒像。',
@@ -377,7 +377,7 @@ const DAYS = [
    { tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'16:45', e:'17:45', en:'Ponte Vecchio', zh:'老桥', ne:'A 1345 bridge lined with jewellers\' shops on both sides — the only bridge in Florence the retreating Germans didn\'t destroy in 1944.', nz:'1345 年建成的桥，两侧都是珠宝金饰店——1944 年德军撤退时唯一没被摧毁的佛罗伦萨桥梁。', q:'Ponte Vecchio, Firenze' },
    { ticket:true, tr_en:'Walk 15 min', tr_zh:'步行 15 分钟', t:'19:00', e:'20:30', en:'Dinner at L\'Osteria di Giovanni', zh:'晚餐 · Osteria di Giovanni', ne:'A family-run Tuscan restaurant. Known for bistecca alla fiorentina — a thick T-bone steak grilled rare — and a signature fried bread served at the table.', nz:'家族经营的托斯卡纳餐厅，以佛罗伦萨大牛排（厚切丁骨牛排，煎至三分熟）闻名，招牌是上桌时附送的炸面包。', q:'L\'Osteria di Giovanni, Via del Moro 22r, Firenze' },
  ]},
- { d:'2026-09-16', city:'florence', en:'The Uffizi and the other bank', zh:'乌菲兹与河对岸', ev:[
+ { d:'2026-09-16', city:'florence', ev:[
    { t:'08:15', e:'08:45', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
    { ticket:true, tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'09:00', e:'12:00', en:'Uffizi Gallery', zh:'乌菲兹美术馆', ne:'The Medici\'s former offices, now the world\'s largest collection of Renaissance painting, arranged chronologically from medieval gold-ground panels to Caravaggio. Botticelli\'s Birth of Venus is the most visited work.',
      nz:'美第奇家族的旧办公楼，如今是世界最大的文艺复兴绘画收藏，按年代从中世纪金底画板排到卡拉瓦乔。波提切利的《维纳斯的诞生》是最多人前来看的作品。',
@@ -394,7 +394,7 @@ const DAYS = [
    { tr_en:'Walk 25 min, or car 10 min', tr_zh:'步行 25 分钟，或打车 10 分钟', t:'18:00', e:'19:30', en:'Piazzale Michelangelo', zh:'米开朗基罗广场', ne:'A terrace on the hill across the river with the whole city laid out below — the Duomo, the towers, the Arno and its bridges. Best at sunset.', nz:'河对岸山上的露台，整座城市铺展在脚下——大教堂、塔楼、阿诺河和它的桥。日落时最美。', q:'Piazzale Michelangelo, Firenze' },
    { t:'20:15', e:'21:45', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
  ]},
- { d:'2026-09-17', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'rome', en:'South to Rome', zh:'南下罗马', ev:[
+ { d:'2026-09-17', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'rome', ev:[
    { t:'08:45', e:'09:15', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
    { ticket:true, dirFrom:'Hotel La Gemma, Via dei Cavalieri 2, 50122 Firenze', dirTo:'Firenze Santa Maria Novella', tr_en:'Car, 6 min', tr_zh:'打车 6 分钟', t:'10:14', e:'11:51', travel:true, en:'Florence → Rome', zh:'佛罗伦萨 → 罗马', ne:'Frecciarossa, Business cabin, coach 5. The hotel is on the station square.', nz:'红箭高铁商务舱，5 车厢。酒店就在车站广场上。', q:'Roma Termini' },
    { tr_en:'Walk 2 min to hotel', tr_zh:'步行 2 分钟到酒店', t:'12:15', e:'13:30', en:'Lunch', zh:'午餐', ne:'', nz:'' },
@@ -408,7 +408,7 @@ const DAYS = [
    { tr_en:'Walk 3 min', tr_zh:'步行 3 分钟', t:'17:05', e:'17:35', en:'Sant\'Ignazio', zh:'圣依纳爵堂', ne:'A Baroque church where the Jesuits ran out of money for a dome, so in 1685 Andrea Pozzo painted one on the flat ceiling instead — stand on the marble disc in the floor and it looks entirely real.', nz:'巴洛克教堂，耶稣会当年没钱建穹顶，1685 年安德烈亚·波佐就在平顶上画了一个——站在地面的大理石圆盘上看，逼真得完全像真的。', q:'Chiesa di Sant\'Ignazio di Loyola, Roma' },
    { ticket:true, tr_en:'Walk 12 min', tr_zh:'步行 12 分钟', t:'19:30', e:'21:00', en:'Dinner at Mariuccia', zh:'晚餐 · Mariuccia', ne:'A hole-in-the-wall trattoria with a patio by Campo de\' Fiori, known for thin-crust pizza, lasagne and house cocktails.', nz:'鲜花广场旁一家带露台的小餐馆，以薄底披萨、千层面和自调鸡尾酒闻名。', q:'Mariuccia, Piazza della Cancelleria 92, 00186 Roma' },
  ]},
- { d:'2026-09-18', city:'rome', en:'Ancient Rome', zh:'古罗马', ev:[
+ { d:'2026-09-18', city:'rome', ev:[
    { t:'08:30', e:'09:10', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
    { tr_en:'Car, 10 min', tr_zh:'打车 10 分钟', t:'09:30', e:'10:15', en:'Trevi Fountain', zh:'特莱维喷泉', ne:'A vast Baroque fountain filling a small square — Neptune driving sea-horses out of the palace wall behind it.', nz:'挤满小广场的巨型巴洛克喷泉——海神驾着海马从后方的宫殿墙面奔出。', q:'Fontana di Trevi, Roma' },
    { tr_en:'Walk 12 min', tr_zh:'步行 12 分钟', t:'10:25', e:'11:45', en:'Spanish Steps and Via Margutta', zh:'西班牙台阶与 Via Margutta', ne:'A hundred and thirty-five steps climbing to a French church built in 1725. Via Margutta beside it is an ivy-covered lane of artists\' studios where Roman Holiday was filmed; Bottega del Marmoraro carves marble plaques to order while you wait.', nz:'135 级台阶通向一座建于 1725 年的法国教堂。旁边的 Margutta 街是常春藤覆盖的艺术家工作室小巷，《罗马假日》曾在此取景；Bottega del Marmoraro 可以现场刻制大理石牌。', q:'Piazza di Spagna, Roma' },
@@ -426,7 +426,7 @@ const DAYS = [
      q:'Foro Romano, Roma' },
    { t:'20:00', e:'21:30', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
  ]},
- { d:'2026-09-19', back_en:'Car, ~18 min back to hotel (once dinner spot is chosen; you\'ll be in or near Trastevere).', back_zh:'选定晚餐地点后，预计打车约 18 分钟回酒店（你会在特拉斯提弗列附近）。', city:'rome', en:'The Vatican and Trastevere', zh:'梵蒂冈与特拉斯提弗列', ev:[
+ { d:'2026-09-19', back_en:'Car, ~18 min back to hotel (once dinner spot is chosen; you\'ll be in or near Trastevere).', back_zh:'选定晚餐地点后，预计打车约 18 分钟回酒店（你会在特拉斯提弗列附近）。', city:'rome', ev:[
    { t:'08:20', e:'09:00', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
    { tr_en:'Car, 20 min', tr_zh:'打车 20 分钟', t:'09:30', e:'11:15', en:'St. Peter\'s Basilica', zh:'圣彼得大教堂', ne:'The largest church in the world, built over the tomb of the apostle Peter. Michelangelo designed the dome, and carved the Pietà just inside the door when he was twenty-four.',
      nz:'世界最大的教堂，建在使徒彼得的墓上。米开朗基罗设计了穹顶，24 岁时雕刻了门内的《圣殇》。',
@@ -442,7 +442,7 @@ const DAYS = [
    { tr_en:'Car 10 min, or walk 20 min along the river', tr_zh:'打车 10 分钟，或沿河步行 20 分钟', t:'14:45', e:'18:30', en:'Trastevere', zh:'特拉斯提弗列', ne:'The old working-class quarter across the river, now Rome\'s most atmospheric — ivy over ochre walls, cobbled lanes, laundry strung between windows. Santa Maria in Trastevere holds gold mosaics from 1140.', nz:'河对岸曾经的工人区，如今是罗马最有情调的角落——赭色墙上的常春藤、石板路，窗户间晾着的衣物。特拉斯提弗列圣母大殿藏有 1140 年的金色马赛克。', q:'Piazza di Santa Maria in Trastevere, Roma' },
    { t:'20:00', e:'21:45', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
  ]},
- { d:'2026-09-20', city:'rome', en:'Flying home', zh:'回家', ev:[
+ { d:'2026-09-20', city:'rome', ev:[
    { t:'07:00', e:'07:25', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
    { ticket:true, tr_en:'Car, 48 min', tr_zh:'打车 48 分钟', t:'11:40', e:'06:00', travel:true, en:'Rome → Singapore', zh:'罗马 → 新加坡', ne:'SQ365', nz:'新航 SQ365', q:'Fiumicino Airport' },
  ]},

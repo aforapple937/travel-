@@ -250,8 +250,7 @@ const CITIES = {
 // status: booked | pending | free | (none for meals/breakfast)
 const DAYS = [
  { d:'2026-09-06',
-   ride:{ from:{ label:'CDG Terminal 1', addr:'Aéroport Paris-Charles de Gaulle Terminal 1, 95700 Roissy-en-France' },
-          to:{ label:'Hôtel Marignan Champs-Élysées', addr:'12 Rue de Marignan, 75008 Paris' } },
+   ride:'Aéroport Paris-Charles de Gaulle Terminal 1, 95700 Roissy-en-France',
    back_en:'Car, 50 min to hotel.', back_zh:'打车 50 分钟到酒店。', city:'paris', en:'Flying out', zh:'出发', ev:[
    { ticket:true, t:'13:35', e:'21:15', travel:true, en:'Singapore → Paris', zh:'新加坡 → 巴黎', ne:'SQ338', nz:'新航 SQ338', tip_en:'At passport control, use the Accès N°1 lane — keep your boarding pass ready.', tip_zh:'过边检时走 Accès N°1 通道——保留登机牌备查。' },
  ]},
@@ -325,8 +324,8 @@ const DAYS = [
  { d:'2026-09-10', city:'grind', en:'Into the Alps', zh:'进入阿尔卑斯', ev:[
    { t:'06:00', e:'06:30', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { ticket:true, t:'06:30', e:'07:00', en:'Uber to Gare de Lyon', zh:'Uber 前往里昂车站', ne:'Pre-booked car.', nz:'已预约车辆。' },
-   { ticket:true, t:'07:22', e:'10:26', travel:true, en:'Paris → Basel', zh:'巴黎 → 巴塞尔', q:'Gare de Lyon, Paris' },
-   { ticket:true, tr_en:'Walk across the station, 10 min', tr_zh:'站内步行 10 分钟', t:'11:30', e:'14:10', travel:true, en:'Basel → Grindelwald', zh:'巴塞尔 → 格林德瓦', tip_en:'The change at Basel SBB is straightforward. Interlaken Ost is the one that needs attention.\n\nThe regional train from Interlaken Ost splits in half at Zweilütschinen: one half uncouples for Lauterbrunnen, the other for Grindelwald.\n\nBefore boarding, check that the destination screen on the side of the carriage explicitly says Grindelwald. The platform board also shows which sector (Sector A or B) is the Grindelwald half.\n\nSaver Day Pass — travel is not tied to a specific train, so missing a connection just means taking the next one.', tip_zh:'巴塞尔 SBB 的换乘很简单，需要格外注意的是 Interlaken Ost。\n\n从 Interlaken Ost 出发的区域列车会在 Zweilütschinen 分成两半：一半开往劳特布龙嫩（Lauterbrunnen），另一半开往格林德瓦（Grindelwald）。\n\n上车前先确认车厢侧面的目的地显示屏写着 Grindelwald。站台指示牌也会标明哪个区段（Sector A 或 B）是往格林德瓦的那一半。\n\n已购一日通票（Saver Day Pass），不绑定固定车次，错过接驳搭下一班即可。', q:'Grindelwald Bahnhof' },
+   { ticket:true, dirFrom:'Hôtel Marignan Champs-Élysées, 12 Rue de Marignan, 75008 Paris', dirMode:'driving', t:'07:22', e:'10:26', travel:true, en:'Paris → Basel', zh:'巴黎 → 巴塞尔', q:'Gare de Lyon, Paris' },
+   { ticket:true, nodir:true, tr_en:'Walk across the station, 10 min', tr_zh:'站内步行 10 分钟', t:'11:30', e:'14:10', travel:true, en:'Basel → Grindelwald', zh:'巴塞尔 → 格林德瓦', tip_en:'The change at Basel SBB is straightforward. Interlaken Ost is the one that needs attention.\n\nThe regional train from Interlaken Ost splits in half at Zweilütschinen: one half uncouples for Lauterbrunnen, the other for Grindelwald.\n\nBefore boarding, check that the destination screen on the side of the carriage explicitly says Grindelwald. The platform board also shows which sector (Sector A or B) is the Grindelwald half.\n\nSaver Day Pass — travel is not tied to a specific train, so missing a connection just means taking the next one.', tip_zh:'巴塞尔 SBB 的换乘很简单，需要格外注意的是 Interlaken Ost。\n\n从 Interlaken Ost 出发的区域列车会在 Zweilütschinen 分成两半：一半开往劳特布龙嫩（Lauterbrunnen），另一半开往格林德瓦（Grindelwald）。\n\n上车前先确认车厢侧面的目的地显示屏写着 Grindelwald。站台指示牌也会标明哪个区段（Sector A 或 B）是往格林德瓦的那一半。\n\n已购一日通票（Saver Day Pass），不绑定固定车次，错过接驳搭下一班即可。', q:'Grindelwald Bahnhof' },
    { tr_en:'Walk 5 min to hotel', tr_zh:'步行 5 分钟到酒店', t:'Evening', e:'', en:'Dorfstrasse', zh:'Dorfstrasse 主街', ne:'The village main street — shops, restaurants and bars. The hotel is on it at number 53, with the north face of the Eiger filling the view.', nz:'小镇主街——商店、餐厅和酒吧。酒店就在街上 53 号，正对艾格峰北壁。', q:'Dorfstrasse, Grindelwald' },
  ]},
  { d:'2026-09-11', back_en:'Walk 5 min back to hotel.', back_zh:'步行 5 分钟回酒店。', city:'grind', en:'Up the mountain', zh:'上山', ev:[
@@ -340,8 +339,8 @@ const DAYS = [
  ]},
  { d:'2026-09-13', city:'florence', en:'Over the Alps to Italy', zh:'翻越阿尔卑斯去意大利', ev:[
    { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
-   { ticket:true, tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'09:17', e:'14:35', travel:true, en:'Grindelwald → Milan', zh:'格林德瓦 → 米兰', ne:'Through the Lötschberg and Simplon tunnels, out of the Alps and down into Italy. Two tight changes — be ready.', nz:'穿过 Lötschberg 和 Simplon 隧道，走出阿尔卑斯进入意大利。两次换乘时间很紧，提前准备。', q:'Milano Centrale' },
-   { ticket:true, tr_en:'Stay in the station, 1h35 wait', tr_zh:'留在车站内，等 1 小时 35 分', t:'16:10', e:'18:04', travel:true, en:'Milan → Florence', zh:'米兰 → 佛罗伦萨', ne:'Frecciarossa, Business cabin, coach 4.', nz:'红箭高铁商务舱，4 车厢。', q:'Firenze Santa Maria Novella' },
+   { ticket:true, dirFrom:'Hotel Belvedere, Dorfstrasse 53, 3818 Grindelwald', dirTo:'Grindelwald Bahnhof', tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'09:17', e:'14:35', travel:true, en:'Grindelwald → Milan', zh:'格林德瓦 → 米兰', ne:'Through the Lötschberg and Simplon tunnels, out of the Alps and down into Italy. Two tight changes — be ready.', nz:'穿过 Lötschberg 和 Simplon 隧道，走出阿尔卑斯进入意大利。两次换乘时间很紧，提前准备。', q:'Milano Centrale' },
+   { ticket:true, nodir:true, tr_en:'Stay in the station, 1h35 wait', tr_zh:'留在车站内，等 1 小时 35 分', t:'16:10', e:'18:04', travel:true, en:'Milan → Florence', zh:'米兰 → 佛罗伦萨', ne:'Frecciarossa, Business cabin, coach 4.', nz:'红箭高铁商务舱，4 车厢。', q:'Firenze Santa Maria Novella' },
    { tr_en:'Walk 12 min to hotel', tr_zh:'步行 12 分钟到酒店', t:'20:00', e:'21:30', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
  ]},
  { d:'2026-09-14', city:'florence', en:'A slow shopping day', zh:'慢悠悠的购物日', ev:[
@@ -391,9 +390,9 @@ const DAYS = [
  ]},
  { d:'2026-09-17', city:'rome', en:'South to Rome', zh:'南下罗马', ev:[
    { t:'08:45', e:'09:15', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
-   { ticket:true, tr_en:'Car, 6 min', tr_zh:'打车 6 分钟', t:'10:14', e:'11:51', travel:true, en:'Florence → Rome', zh:'佛罗伦萨 → 罗马', ne:'Frecciarossa, Business cabin, coach 5. The hotel is on the station square.', nz:'红箭高铁商务舱，5 车厢。酒店就在车站广场上。', q:'Roma Termini' },
+   { ticket:true, dirFrom:'Hotel La Gemma, Via dei Cavalieri 2, 50122 Firenze', dirTo:'Firenze Santa Maria Novella', tr_en:'Car, 6 min', tr_zh:'打车 6 分钟', t:'10:14', e:'11:51', travel:true, en:'Florence → Rome', zh:'佛罗伦萨 → 罗马', ne:'Frecciarossa, Business cabin, coach 5. The hotel is on the station square.', nz:'红箭高铁商务舱，5 车厢。酒店就在车站广场上。', q:'Roma Termini' },
    { tr_en:'Walk 2 min to hotel', tr_zh:'步行 2 分钟到酒店', t:'12:15', e:'13:30', en:'Lunch', zh:'午餐', ne:'', nz:'' },
-   { tr_en:'Car from the hotel, 12 min', tr_zh:'从酒店打车 12 分钟', t:'13:45', e:'15:30', en:'Via dei Coronari', zh:'Via dei Coronari 古董街', ne:'Rome\'s antiques street — old prints, lamps and silver in shopfronts along a lane once walked by pilgrims to St. Peter\'s. Via del Governo Vecchio runs parallel with vintage clothing; Ai Monasteri nearby sells only goods made by monks — liqueurs, honeys, soaps.', nz:'罗马的古董街——旧版画、灯具和银器陈列在这条曾是朝圣者通往圣彼得大教堂之路的沿街店铺里。旁边的 Governo Vecchio 街平行分布着复古服饰店；附近的 Ai Monasteri 只卖修士制作的东西——利口酒、蜂蜜、香皂。', q:'Via dei Coronari, Roma' },
+   { dirFrom:'NH Collection Roma Palazzo Cinquecento, Piazza dei Cinquecento 90, 00185 Roma', tr_en:'Car from the hotel, 12 min', tr_zh:'从酒店打车 12 分钟', t:'13:45', e:'15:30', en:'Via dei Coronari', zh:'Via dei Coronari 古董街', ne:'Rome\'s antiques street — old prints, lamps and silver in shopfronts along a lane once walked by pilgrims to St. Peter\'s. Via del Governo Vecchio runs parallel with vintage clothing; Ai Monasteri nearby sells only goods made by monks — liqueurs, honeys, soaps.', nz:'罗马的古董街——旧版画、灯具和银器陈列在这条曾是朝圣者通往圣彼得大教堂之路的沿街店铺里。旁边的 Governo Vecchio 街平行分布着复古服饰店；附近的 Ai Monasteri 只卖修士制作的东西——利口酒、蜂蜜、香皂。', q:'Via dei Coronari, Roma' },
    { tr_en:'Walk 3 min', tr_zh:'步行 3 分钟', t:'15:30', e:'15:55', en:'Piazza Navona', zh:'纳沃纳广场', ne:'A long Baroque square shaped like the Roman stadium it was built on, with Bernini\'s Fountain of the Four Rivers at its centre and cafés around the edge.', nz:'建在古罗马竞技场遗址上的巴洛克长形广场，中央是贝尔尼尼的四河喷泉，四周环绕着咖啡馆。', q:'Piazza Navona, Roma' },
    { ticket:true, tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'16:00', e:'17:00', en:'Pantheon', zh:'万神殿', ne:'Built by Hadrian in 126 AD and never fallen down — the best-preserved building of ancient Rome. Its concrete dome is still the largest unreinforced one in the world, open to the sky through the oculus.',
      nz:'哈德良皇帝公元 126 年所建，从未倒塌——古罗马保存最完好的建筑。混凝土穹顶至今仍是世界最大的无钢筋穹顶，正中的孔洞向天空敞开。',
@@ -413,7 +412,7 @@ const DAYS = [
      tip_zh:'12:30 定时入场——12:15 前到入口。\n\n建议路线：先看斗兽场，再出去走古罗马广场和帕拉蒂尼山——一旦离开不能再进，需一次走完。',
      q:'Colosseo, Roma' },
    { tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'14:00', e:'15:15', en:'Lunch at La Nuova Piazzetta', zh:'午餐 · La Nuova Piazzetta', ne:'A pasta restaurant in Monti. Known for fresh, hand-made pasta — pesto with clams and burrata, cacio e pepe — and a tiramisu served in a mini moka pot.', nz:'Monti 区的意面餐厅，以新鲜手工意面闻名——蛤蜊布拉塔青酱意面、黑椒芝士意面——提拉米苏用迷你摩卡壶盛装上桌。', q:'La Nuova Piazzetta, Vicolo del Buon Consiglio, Roma' },
-   { tr_en:'Already there', tr_zh:'就在附近', t:'15:15', e:'16:30', en:'Monti', zh:'Monti 区', ne:'Rome\'s oldest neighbourhood, once its slum — now cobbled lanes of independent shops, wine bars and vintage clothing.', nz:'罗马最古老的街区，曾是贫民窟——如今是石板小巷里的独立小店、酒吧和复古服饰店。', q:'Via del Boschetto, Roma' },
+   { nodir:true, tr_en:'Already there', tr_zh:'就在附近', t:'15:15', e:'16:30', en:'Monti', zh:'Monti 区', ne:'Rome\'s oldest neighbourhood, once its slum — now cobbled lanes of independent shops, wine bars and vintage clothing.', nz:'罗马最古老的街区，曾是贫民窟——如今是石板小巷里的独立小店、酒吧和复古服饰店。', q:'Via del Boschetto, Roma' },
    { tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'16:45', e:'18:45', en:'Roman Forum and Palatine Hill', zh:'古罗马广场与帕拉蒂尼山', ne:'The centre of the Roman world for a thousand years — the Senate, the temples, the road every triumph marched down. The Palatine Hill above it is where the emperors built their palaces, the origin of the word itself.',
      nz:'一千年来罗马世界的中心——元老院、神庙，还有每一次凯旋游行走过的大道。上方的帕拉蒂尼山是皇帝们建造宫殿的地方，"宫殿"（palace）一词正源于此。',
      tip_en:'Same ticket as the Colosseum, valid 24h — not separately timed. But no re-entry once you exit the whole park, so this follows straight on from the Colosseum.',
@@ -454,12 +453,28 @@ const DOW_ZH = ['周日','周一','周二','周三','周四','周五','周六'];
 const MON_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 function mapUrl(q){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
-// Google Maps directions. Prefers the written address, which geocodes more
-// reliably than a coordinate pair and reads better on the screen.
-function dirUrl(f, t){
-  const pt = p => p.addr || p.label || (p.lat + ',' + p.lng);
-  return 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(pt(f))
-    + '&destination=' + encodeURIComponent(pt(t)) + '&travelmode=driving';
+// Google Maps directions. Written addresses geocode more reliably than
+// coordinates and read better on screen.
+function dirUrl(from, to, mode){
+  const e = encodeURIComponent;
+  return 'https://www.google.com/maps/dir/?api=1&origin=' + e(from)
+    + '&destination=' + e(to) + '&travelmode=' + (mode || 'walking');
+}
+// Travel mode taken from the hop text above the event.
+function modeOf(t){
+  const s = (t || '').toLowerCase();
+  if (s.includes('car')) return 'driving';
+  if (s.includes('train')) return 'transit';
+  return 'walking';
+}
+// You set off from wherever the last pinned stop was, or from the hotel.
+function originFor(day, i){
+  for (let k = i - 1; k >= 0; k--) if (day.ev[k].q) return day.ev[k].q;
+  return CITIES[day.city].hotelq;
+}
+function lastStop(day){
+  for (let k = day.ev.length - 1; k >= 0; k--) if (day.ev[k].q) return day.ev[k].q;
+  return '';
 }
 function dateObj(d){ const [y,m,dd]=d.split('-').map(Number); return new Date(y,m-1,dd); }
 function todayIdx(){
@@ -508,7 +523,10 @@ function renderDay(){
     const tr = lang==='zh' ? e.tr_zh : e.tr_en;
     const note = lang==='zh' ? e.nz : e.ne;
     const tip = lang==='zh' ? e.tip_zh : e.tip_en;
-    const hasMeta = e.q || tip;
+    const dirHref = (e.q && !e.nodir)
+      ? dirUrl(e.dirFrom || originFor(day, ei), e.dirTo || e.q, e.dirMode || modeOf(e.tr_en))
+      : '';
+    const hasMeta = dirHref || tip;
     return `${tr?`<li class="hop">${tr}</li>`:''}
     <li class="ev ${e.travel?'travel':''} ${e.ticket?'ticket':''}">
       <div class="time">${e.notime?'':e.t}${(e.notime||!e.e)?'':`<span class="end">${e.e}</span>`}</div>
@@ -516,14 +534,15 @@ function renderDay(){
         <div class="name">${lang==='zh'?e.zh:e.en}</div>
         ${note?`<div class="note">${note}</div>`:''}
         ${hasMeta?`<div class="meta">
-          ${e.q?`<a class="actionbtn" href="${mapUrl(e.q)}" target="_blank" rel="noopener">${lang==='zh'?'打开地图':'Open in Maps'}</a>`:''}
+          ${dirHref?`<a class="actionbtn" href="${dirHref}" target="_blank" rel="noopener">${lang==='zh'?'路线':'Directions'}</a>`:''}
           ${tip?`<button type="button" class="actionbtn tip" data-idx="${ei}">${lang==='zh'?'注意事项':'Things to note'}</button>`:''}
         </div>`:''}
       </div>
     </li>`;}).join('');
   const backText = lang==='zh' ? day.back_zh : day.back_en;
-  const rideHtml = day.ride
-    ? ` <a class="ridelink" href="${dirUrl(day.ride.from, day.ride.to)}" target="_blank" rel="noopener">${lang==='zh'?'路线':'Directions'}</a>`
+  const backFrom = day.ride || lastStop(day);
+  const rideHtml = (backText && backFrom)
+    ? ` <a class="ridelink" href="${dirUrl(backFrom, c.hotelq, modeOf(day.back_en))}" target="_blank" rel="noopener">${lang==='zh'?'路线':'Directions'}</a>`
     : '';
   const backHtml = backText ? `<li class="hop back">${backText}${rideHtml}</li>` : '';
   view.innerHTML = `

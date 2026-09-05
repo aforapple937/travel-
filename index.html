@@ -250,7 +250,7 @@ const CITIES = {
 // status: booked | pending | free | (none for meals/breakfast)
 const DAYS = [
  { d:'2026-09-06',
-   ride:{ from:{ lat:49.01366, lng:2.54125, label:'CDG Terminal 1' },
+   ride:{ from:{ lat:49.01366, lng:2.54125, label:'CDG Terminal 1', addr:'Aéroport Paris-Charles de Gaulle Terminal 1, 95700 Roissy-en-France' },
           to:{ lat:48.8687, lng:2.3055, label:'Hôtel Marignan Champs-Élysées', addr:'12 Rue de Marignan, 75008 Paris' } },
    back_en:'Car, ~50 min to hotel (after immigration and bag collection).', back_zh:'打车约 50 分钟到酒店（含过关和取行李时间）。', city:'paris', en:'Flying out', zh:'出发', ev:[
    { ticket:true, t:'13:35', e:'21:15', travel:true, en:'Singapore → Paris', zh:'新加坡 → 巴黎', ne:'SQ338', nz:'新航 SQ338', tip_en:'At passport control, use the Accès N°1 lane — keep your boarding pass ready.', tip_zh:'过边检时走 Accès N°1 通道——保留登机牌备查。' },
@@ -454,6 +454,13 @@ const DOW_ZH = ['周日','周一','周二','周三','周四','周五','周六'];
 const MON_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 function mapUrl(q){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
+// Google Maps directions. Prefers the written address, which geocodes more
+// reliably than a coordinate pair and reads better on the screen.
+function dirUrl(f, t){
+  const pt = p => p.addr || p.label || (p.lat + ',' + p.lng);
+  return 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(pt(f))
+    + '&destination=' + encodeURIComponent(pt(t)) + '&travelmode=driving';
+}
 // Uber universal link. Needs coordinates — an address string alone will not prefill.
 function uberUrl(f, t){
   const e = encodeURIComponent;
@@ -524,7 +531,8 @@ function renderDay(){
     </li>`;}).join('');
   const backText = lang==='zh' ? day.back_zh : day.back_en;
   const rideHtml = day.ride
-    ? ` <a class="ridelink" href="${uberUrl(day.ride.from, day.ride.to)}" target="_blank" rel="noopener">${lang==='zh'?'叫 Uber':'Order Uber'}</a>`
+    ? ` <a class="ridelink" href="${dirUrl(day.ride.from, day.ride.to)}" target="_blank" rel="noopener">${lang==='zh'?'路线':'Directions'}</a>`
+      + ` <a class="ridelink" href="${uberUrl(day.ride.from, day.ride.to)}" target="_blank" rel="noopener">${lang==='zh'?'叫 Uber':'Order Uber'}</a>`
     : '';
   const backHtml = backText ? `<li class="hop back">${backText}${rideHtml}</li>` : '';
   view.innerHTML = `

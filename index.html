@@ -144,6 +144,11 @@
   }
   .hop::before { content: ""; display: block; justify-self: center; width: 1px; height: 18px; background: var(--hairline); }
   body.zh .hop { font-style: normal; }
+  .hop .ridelink {
+    font-style: normal; white-space: nowrap; margin-left: 8px;
+    color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline);
+  }
+  .hop .ridelink:hover { border-color: var(--ink); }
 
   .nav { display: flex; justify-content: space-between; margin-top: 26px; }
   .nav button {
@@ -244,7 +249,10 @@ const CITIES = {
 
 // status: booked | pending | free | (none for meals/breakfast)
 const DAYS = [
- { d:'2026-09-06', back_en:'Car, ~50 min to hotel (after immigration and bag collection).', back_zh:'打车约 50 分钟到酒店（含过关和取行李时间）。', city:'paris', en:'Flying out', zh:'出发', ev:[
+ { d:'2026-09-06',
+   ride:{ from:{ lat:49.01366, lng:2.54125, label:'CDG Terminal 1' },
+          to:{ lat:48.8687, lng:2.3055, label:'Hôtel Marignan Champs-Élysées', addr:'12 Rue de Marignan, 75008 Paris' } },
+   back_en:'Car, ~50 min to hotel (after immigration and bag collection).', back_zh:'打车约 50 分钟到酒店（含过关和取行李时间）。', city:'paris', en:'Flying out', zh:'出发', ev:[
    { ticket:true, t:'13:35', e:'21:15', travel:true, en:'Singapore → Paris', zh:'新加坡 → 巴黎', ne:'SQ338', nz:'新航 SQ338', tip_en:'At passport control, use the Accès N°1 lane — keep your boarding pass ready.', tip_zh:'过边检时走 Accès N°1 通道——保留登机牌备查。' },
  ]},
  { d:'2026-09-07', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'paris', en:'Museums and the islands', zh:'博物馆与河心岛', ev:[
@@ -446,6 +454,14 @@ const DOW_ZH = ['周日','周一','周二','周三','周四','周五','周六'];
 const MON_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 function mapUrl(q){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
+// Uber universal link. Needs coordinates — an address string alone will not prefill.
+function uberUrl(f, t){
+  const e = encodeURIComponent;
+  return 'https://m.uber.com/ul/?action=setPickup'
+    + '&pickup[latitude]=' + f.lat + '&pickup[longitude]=' + f.lng + '&pickup[nickname]=' + e(f.label)
+    + '&dropoff[latitude]=' + t.lat + '&dropoff[longitude]=' + t.lng + '&dropoff[nickname]=' + e(t.label)
+    + '&dropoff[formatted_address]=' + e(t.addr || t.label);
+}
 function dateObj(d){ const [y,m,dd]=d.split('-').map(Number); return new Date(y,m-1,dd); }
 function todayIdx(){
   const now = new Date(); const t = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
@@ -507,7 +523,10 @@ function renderDay(){
       </div>
     </li>`;}).join('');
   const backText = lang==='zh' ? day.back_zh : day.back_en;
-  const backHtml = backText ? `<li class="hop back">${backText}</li>` : '';
+  const rideHtml = day.ride
+    ? ` <a class="ridelink" href="${uberUrl(day.ride.from, day.ride.to)}" target="_blank" rel="noopener">${lang==='zh'?'叫 Uber':'Order Uber'}</a>`
+    : '';
+  const backHtml = backText ? `<li class="hop back">${backText}${rideHtml}</li>` : '';
   view.innerHTML = `
     <div class="day-head">
       <h2 class="serif">${dateLine}, ${lang==='zh'?c.zh:c.en}</h2>

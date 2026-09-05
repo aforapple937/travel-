@@ -139,16 +139,24 @@
 
   .hop {
     display: grid; grid-template-columns: 62px 1fr; gap: 14px;
-    padding: 6px 0; font-size: 12px; color: var(--graphite); font-style: italic;
+    padding: 7px 0; font-size: 12px; color: var(--graphite);
     border-bottom: 1px solid var(--hairline);
   }
-  .hop::before { content: ""; display: block; justify-self: center; width: 1px; height: 18px; background: var(--hairline); }
-  body.zh .hop { font-style: normal; }
-  .hop .ridelink {
-    font-style: normal; white-space: nowrap; margin-left: 8px;
-    color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline);
+  .hop::before { content: ""; display: block; justify-self: center; width: 1px; height: 100%; min-height: 18px; background: var(--hairline); }
+  .hopline { display: flex; align-items: center; gap: 12px; min-height: 22px; }
+  .hoptext { font-style: italic; }
+  body.zh .hoptext { font-style: normal; }
+  .dirbtn {
+    margin-left: auto; flex: none; font-style: normal;
+    font-size: 11.5px; line-height: 1; color: var(--graphite); text-decoration: none;
+    border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 11px 5px 9px;
+    display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+    transition: color .15s, border-color .15s;
   }
-  .hop .ridelink:hover { border-color: var(--ink); }
+  .dirbtn svg { flex: none; opacity: .75; }
+  .dirbtn:hover { color: var(--ink); border-color: var(--ink); }
+  .dirbtn:hover svg { opacity: 1; }
+  .dirbtn:focus-visible { outline: 2px solid var(--wine); outline-offset: 2px; }
 
   .nav { display: flex; justify-content: space-between; margin-top: 26px; }
   .nav button {
@@ -514,6 +522,15 @@ function renderStrip(){
     try { on.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'}); } catch(err){ /* ignore */ }
   }
 }
+// One hop row: the travel note on the left, the route button on the right.
+function hopLine(text, href, lang){
+  const arrow = '<svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true">'
+    + '<path d="M2 10 L10 2 M4.5 2 H10 V7.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const btn = href
+    ? `<a class="dirbtn" href="${href}" target="_blank" rel="noopener">${arrow}${lang==='zh'?'路线':'Directions'}</a>`
+    : '';
+  return `<div class="hopline"><span class="hoptext">${text||''}</span>${btn}</div>`;
+}
 function renderDay(){
   const day = DAYS[idx]; const c = CITIES[day.city]; const dt = dateObj(day.d);
   const dateLine = lang==='zh'
@@ -526,25 +543,22 @@ function renderDay(){
     const dirHref = (e.q && !e.nodir)
       ? dirUrl(e.dirFrom || originFor(day, ei), e.dirTo || e.q, e.dirMode || modeOf(e.tr_en))
       : '';
-    const hasMeta = dirHref || tip;
-    return `${tr?`<li class="hop">${tr}</li>`:''}
+    const hasMeta = !!tip;
+    return `${(tr||dirHref)?`<li class="hop">${hopLine(tr, dirHref, lang)}</li>`:''}
     <li class="ev ${e.travel?'travel':''} ${e.ticket?'ticket':''}">
       <div class="time">${e.notime?'':e.t}${(e.notime||!e.e)?'':`<span class="end">${e.e}</span>`}</div>
       <div>
         <div class="name">${lang==='zh'?e.zh:e.en}</div>
         ${note?`<div class="note">${note}</div>`:''}
         ${hasMeta?`<div class="meta">
-          ${dirHref?`<a class="actionbtn" href="${dirHref}" target="_blank" rel="noopener">${lang==='zh'?'路线':'Directions'}</a>`:''}
-          ${tip?`<button type="button" class="actionbtn tip" data-idx="${ei}">${lang==='zh'?'注意事项':'Things to note'}</button>`:''}
+          <button type="button" class="actionbtn tip" data-idx="${ei}">${lang==='zh'?'注意事项':'Things to note'}</button>
         </div>`:''}
       </div>
     </li>`;}).join('');
   const backText = lang==='zh' ? day.back_zh : day.back_en;
   const backFrom = day.ride || lastStop(day);
-  const rideHtml = (backText && backFrom)
-    ? ` <a class="ridelink" href="${dirUrl(backFrom, c.hotelq, modeOf(day.back_en))}" target="_blank" rel="noopener">${lang==='zh'?'路线':'Directions'}</a>`
-    : '';
-  const backHtml = backText ? `<li class="hop back">${backText}${rideHtml}</li>` : '';
+  const backDir = (backText && backFrom) ? dirUrl(backFrom, c.hotelq, modeOf(day.back_en)) : '';
+  const backHtml = backText ? `<li class="hop back">${hopLine(backText, backDir, lang)}</li>` : '';
   view.innerHTML = `
     <div class="day-head">
       <h2 class="serif">${dateLine}, ${lang==='zh'?c.zh:c.en}</h2>

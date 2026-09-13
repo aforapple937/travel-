@@ -344,7 +344,7 @@ const DAYS = [
    { t:'07:30', e:'08:00', notime:true, en:'Breakfast', zh:'早餐', ne:'At the hotel.', nz:'酒店内。' },
    { ticket:true, dirFrom:'Hotel Belvedere, Dorfstrasse 53, 3818 Grindelwald', dirTo:'Grindelwald Bahnhof', tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'09:17', e:'14:40', travel:true, en:'Grindelwald → Milan', zh:'格林德瓦 → 米兰', ne:'Through the Lötschberg and Simplon tunnels, out of the Alps and down into Italy. Change at Domodossola onto the 12:55 Trenord 33007, which ends at Porta Garibaldi, not Centrale.', nz:'穿过 Lötschberg 和 Simplon 隧道，走出阿尔卑斯进入意大利。在 Domodossola 换乘 12:55 的 Trenord 33007，终点是 Porta Garibaldi，不是中央车站。', q:'Milano Porta Garibaldi' },
    { ticket:true, dirFrom:'Milano Porta Garibaldi', dirTo:'Milano Centrale', dirMode:'transit', tr_en:'Metro M2, 2 stops to Centrale', tr_zh:'地铁 M2 线，2 站到中央车站', t:'16:10', e:'18:04', travel:true, en:'Milan → Florence', zh:'米兰 → 佛罗伦萨', ne:'Frecciarossa out of Milano Centrale, Business cabin, coach 4. About ten minutes on the metro from Porta Garibaldi, then an hour and a quarter in the station.', nz:'从米兰中央车站出发的红箭高铁，商务舱 4 车厢。从 Porta Garibaldi 坐地铁约 10 分钟，之后在车站等一小时一刻钟。', q:'Firenze Santa Maria Novella' },
-   { dirFrom:'Hotel La Gemma, Via dei Cavalieri 2, 50122 Firenze', tr_en:'Walk 12 min to hotel, 8 min on to dinner', tr_zh:'步行 12 分钟到酒店，再走 8 分钟去吃饭', t:'20:00', e:'21:30', en:'Dinner at Cacio e Vino', zh:'晚餐 · Cacio e Vino', ne:'A small osteria on a side street off the river, a few minutes from Ponte Vecchio. Tuscan cooking, cheese and wine to its name.', nz:'河边小巷里的小餐馆，离老桥几分钟路。托斯卡纳菜，店名就是奶酪和酒。', q:'Osteria Cacio e Vino all\'Antico Borgo, Borgo Santi Apostoli 29R, 50123 Firenze' },
+   { ticket:true, dirFrom:'Hotel La Gemma, Via dei Cavalieri 2, 50122 Firenze', tr_en:'Walk 12 min to hotel, 8 min on to dinner', tr_zh:'步行 12 分钟到酒店，再走 8 分钟去吃饭', t:'19:30', e:'21:00', en:'Dinner at Cacio e Vino', zh:'晚餐 · Cacio e Vino', ne:'A small osteria on a side street off the river, a few minutes from Ponte Vecchio. Tuscan cooking, cheese and wine to its name.', nz:'河边小巷里的小餐馆，离老桥几分钟路。托斯卡纳菜，店名就是奶酪和酒。', q:'Osteria Cacio e Vino all\'Antico Borgo, Borgo Santi Apostoli 29R, 50123 Firenze' },
  ]},
  { d:'2026-09-14', city:'florence', ev:[
    { t:'09:00', e:'09:30', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
@@ -374,7 +374,7 @@ const DAYS = [
    { tr_en:'Walk 5 min', tr_zh:'步行 5 分钟', t:'16:45', e:'17:45', en:'Ponte Vecchio', zh:'老桥', ne:'A 1345 bridge lined with jewellers\' shops on both sides — the only bridge in Florence the retreating Germans didn\'t destroy in 1944.', nz:'1345 年建成的桥，两侧都是珠宝金饰店——1944 年德军撤退时唯一没被摧毁的佛罗伦萨桥梁。', q:'Ponte Vecchio, Firenze' },
    { ticket:true, tr_en:'Walk 15 min', tr_zh:'步行 15 分钟', t:'19:00', e:'20:30', en:'Dinner at L\'Osteria di Giovanni', zh:'晚餐 · Osteria di Giovanni', ne:'A family-run Tuscan restaurant. Known for bistecca alla fiorentina — a thick T-bone steak grilled rare — and a signature fried bread served at the table.', nz:'家族经营的托斯卡纳餐厅，以佛罗伦萨大牛排（厚切丁骨牛排，煎至三分熟）闻名，招牌是上桌时附送的炸面包。', q:'L\'Osteria di Giovanni, Via del Moro 22r, Firenze' },
  ]},
- { d:'2026-09-16', city:'florence', ev:[
+ { d:'2026-09-16', back_en:'Walk 8 min back to hotel.', back_zh:'步行 8 分钟回酒店。', city:'florence', ev:[
    { t:'08:15', e:'08:45', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
    { ticket:true, tr_en:'Walk 10 min', tr_zh:'步行 10 分钟', t:'09:00', e:'12:00', en:'Uffizi Gallery', zh:'乌菲兹美术馆', ne:'The Medici\'s former offices, now the world\'s largest collection of Renaissance painting, arranged chronologically from medieval gold-ground panels to Caravaggio. Botticelli\'s Birth of Venus is the most visited work.',
      nz:'美第奇家族的旧办公楼，如今是世界最大的文艺复兴绘画收藏，按年代从中世纪金底画板排到卡拉瓦乔。波提切利的《维纳斯的诞生》是最多人前来看的作品。',
@@ -389,7 +389,7 @@ const DAYS = [
      tip_zh:'15:30 定时入场——15:20 前到。\n\n1. 从皮蒂宫正门（庭院旁）进入。\n2. 沿花园上坡走，一路爬向山顶。\n3. 从山顶的贝尔维德雷堡出口离开。\n4. 沿着风景优美、树荫夹道的古城墙走到米开朗基罗广场。',
      q:'Giardino di Boboli, Firenze' },
    { tr_en:'Walk 25 min, or car 10 min', tr_zh:'步行 25 分钟，或打车 10 分钟', t:'18:00', e:'19:30', en:'Piazzale Michelangelo', zh:'米开朗基罗广场', ne:'A terrace on the hill across the river with the whole city laid out below — the Duomo, the towers, the Arno and its bridges. Best at sunset.', nz:'河对岸山上的露台，整座城市铺展在脚下——大教堂、塔楼、阿诺河和它的桥。日落时最美。', q:'Piazzale Michelangelo, Firenze' },
-   { t:'20:15', e:'21:45', en:'Dinner', zh:'晚餐', ne:'', nz:'' },
+   { ticket:true, tr_en:'Car, 10 min', tr_zh:'打车 10 分钟', t:'20:00', e:'21:30', en:'Dinner at Cacio e Vino', zh:'晚餐 · Cacio e Vino', ne:'The same osteria on Borgo Santi Apostoli as on the first night.', nz:'和第一晚同一家，Borgo Santi Apostoli 上的小餐馆。', q:'Osteria Cacio e Vino all\'Antico Borgo, Borgo Santi Apostoli 29R, 50123 Firenze' },
  ]},
  { d:'2026-09-17', back_en:'Car, 15 min back to hotel.', back_zh:'打车 15 分钟回酒店。', city:'rome', ev:[
    { t:'08:45', e:'09:15', notime:true, en:'Breakfast', zh:'早餐', ne:'', nz:'' },
